@@ -11,7 +11,7 @@ export function useTelegram(){
             tg.MainButton.hide();
         }
         else{
-            tg.MainButton.shoe();
+            tg.MainButton.show();
         }
     }
 

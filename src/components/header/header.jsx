@@ -1,7 +1,8 @@
 import React from 'react';
-import './components/header/header.css'; 
-
-import { useTelegram } from './hooks/useTelegram';
+// import './components/header/header.css'; 
+// import { useTelegram } from '../../hooks/useTelegram';
+import './header.css'; // Adjusted path
+import { useTelegram } from '../../hooks/useTelegram'; // Adjusted path
 
 const Header = () => {
     const {user, onClose} = useTelegram();

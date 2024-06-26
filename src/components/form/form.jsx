@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './form.css';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const Form = () => {
     const [email, setEmail] = useState(''); 
@@ -28,7 +29,7 @@ const Form = () => {
 
     useEffect(() => {
 
-        if(!email || !password){
+        if(!email || !password || !subject){
             tg.MainButton.hide();
         }
         else{

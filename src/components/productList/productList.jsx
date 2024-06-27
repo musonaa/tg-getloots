@@ -24,7 +24,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch("http://localhost:8000", {
+        fetch("http://localhost:8000/web-data", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const ProductList = () => {
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData] )
+    }, [onSendData, tg] )
 
 
     const onAdd = (product) => {

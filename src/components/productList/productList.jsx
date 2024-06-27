@@ -4,8 +4,9 @@ import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 
 const products = [
-    {id: '1', title: 'RP', price: 300, description: "Выгодно"},
-    {id: '2', title: 'Кристалы Сотворения', price: 500, description: "Выгодно"},
+    {id: '1', title: 'RP', price: 300, description: "Выгодно", img: "/images/rp.png"},
+    {id: '2', title: 'Кристалы Сотворения', price: 500, description: "Выгодно", img: "/images/crystals.webp"},
+    {id: '3', title: 'Астерит', price: 500, description: "Выгодно", img: "/images/asterite.webp"},
 ];
 
 const getTotalPrice = (items = []) => {

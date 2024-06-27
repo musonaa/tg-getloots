@@ -77,9 +77,9 @@ const Form = () => {
 
             <select value={subject} onChange={onChangesubject} className='select' placeholder='Choose the game'>
                 <option value="none">Not Selected</option>
-                <option value="game">League of Legends</option>
-                <option value="game">Genshin Impact</option>
-                <option value="game">Wuthering Waves</option>
+                <option value="League of Legends">League of Legends</option>
+                <option value="Genshin Impact">Genshin Impact</option>
+                <option value="Wuthering Waves">Wuthering Waves</option>
             </select>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './form.css';
 import { useTelegram } from '../../hooks/useTelegram';
 
@@ -6,6 +6,16 @@ const Form = () => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
     const [subject, setSubject] = useState(''); 
+    const { tg } = useTelegram();
+
+    const onSendData = useCallback( () =>{
+        const data ={
+            email,
+            password,
+            subject
+        }
+        tg.sendData(JSON.stringify(data))
+    }, [email, password, subject])
 
     const onChangeEmail = (e) =>{
         setEmail(e.target.value)
@@ -19,7 +29,13 @@ const Form = () => {
         setSubject(e.target.value)
     }
 
-    const { tg } = useTelegram();
+    
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () =>{
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData] )
 
     useEffect(() => {
         tg.MainButton.setParams({

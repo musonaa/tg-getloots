@@ -6,6 +6,7 @@ const Form = () => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
     const [subject, setSubject] = useState(''); 
+
     const { tg } = useTelegram();
 
     const onSendData = useCallback( () =>{
@@ -14,8 +15,34 @@ const Form = () => {
             password,
             subject
         }
-        tg.sendData(JSON.stringify(data))
+        tg.sendData(JSON.stringify(data));
     }, [email, password, subject])
+
+    
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData] )
+
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'Отправить данные'
+        })
+    }, [] )
+
+    //Без пустых данных
+    useEffect(() => {
+        if(!email || !password || !subject){
+            tg.MainButton.hide();
+        }
+        else{
+            tg.MainButton.show();
+        }
+    }, [email, password, subject] )
+
+
 
     const onChangeEmail = (e) =>{
         setEmail(e.target.value)
@@ -29,28 +56,6 @@ const Form = () => {
         setSubject(e.target.value)
     }
 
-    
-    useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () =>{
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData] )
-
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text: 'Отправить данные'
-        })
-    }, [] )
-
-    useEffect(() => {
-        if(!email || !password || !subject){
-            tg.MainButton.hide();
-        }
-        else{
-            tg.MainButton.show();
-        }
-    }, [email, password] )
 
     return(
         <div className='form'>

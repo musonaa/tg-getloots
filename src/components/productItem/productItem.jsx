@@ -2,17 +2,17 @@ import React from 'react';
 import "./productItem.css";
 import Button from '../button/button';
 
-const productItem = ({product, className, onAdd}) => {
+const ProductItem = ({ product, className, onAdd }) => {
 
-    const onAddHandler = () =>{
+    const onAddHandler = () => {
         onAdd(product);
     }
 
-    return(
-        <div className={'product' + className}>
-            <div className={'img'}/>
-            <div className={'title'}>{productItem.title}</div>
-            <div className={'description'}>{productItem.description}</div>
+    return (
+        <div className={'product ' + className}>
+            <div className={'img'} />
+            <div className={'title'}>{product.title}</div>
+            <div className={'description'}>{product.description}</div>
             <div className={'price'}>
                 <span>Стоимость: <b>{product.price}</b></span>
             </div>
@@ -20,7 +20,7 @@ const productItem = ({product, className, onAdd}) => {
                 Добавить в корзину
             </Button>
         </div>
-    )
+    );
 }
 
-export default productItem;
+export default ProductItem;

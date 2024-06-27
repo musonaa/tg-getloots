@@ -28,8 +28,10 @@ const Form = () => {
     }, [] )
 
     useEffect(() => {
-
-        if(!email || !password || !subject){
+        if(subject==none){
+            tg.MainButton.hide();
+        }
+        if(!email || !password){
             tg.MainButton.hide();
         }
         else{

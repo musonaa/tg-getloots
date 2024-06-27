@@ -4,9 +4,57 @@ import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 
 const products = [
-    {id: '1', title: 'RP', price: 300, description: "Выгодно", img: "/images/rp.png"},
-    {id: '2', title: 'Кристалы Сотворения', price: 500, description: "Выгодно", img: "/images/crystals.webp"},
-    {id: '3', title: 'Астерит', price: 500, description: "Выгодно", img: "/images/asterite.webp"},
+
+    {id: '1', title: '470 RP', price: 200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '2', title: '1380 RP', price: 480, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '3', title: '2600 RP', price: 880, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '4', title: '5300 RP', price: 1625, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '5', title: '8100 RP', price: 2450, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '6', title: '11000 RP', price: 3200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '7', title: '33500 RP', price: 9500, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+    {id: '8', title: '60200 RP', price: 16800, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
+
+    {id: '9', title: 'Луна', price: 330, description: "Товар на скидке", img: "/images/luna.webp", category: 'genshin'},
+    {id: '16', title: 'Жемчужный Гимн', price: 620, description: "Товар на скидке", img: "/images/perl.webp", category: 'genshin'},
+    {id: '17', title: 'Жемчужный Хор', price: 1150, description: "Товар на скидке", img: "/images/perl.webp", category: 'genshin'},
+    {id: '10', title: '60 Кристалов', price: 65, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+    {id: '11', title: '300 Кристалов', price: 290, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+    {id: '12', title: '980 Кристалов', price: 880, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+    {id: '13', title: '1980 Кристалов', price: 1600, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+    {id: '14', title: '3280 Кристалов', price: 2830, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+    {id: '15', title: '6480 Кристалов', price: 5650, description: "Товар на скидке", img: "/images/crystals.webp", category: 'genshin'},
+
+    {id: '18', title: 'Лунит Подписка', price: 435, description: "Товар на скидке", img: "/images/lunite-subscription.webp", category: 'wuwa'},
+    {id: '19', title: '60 Лунитов', price: 85, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '20', title: '300 Лунитов', price: 430, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '21', title: '980 Лунитов', price: 1300, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '22', title: '1980 Лунитов', price: 2600, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '23', title: '3280 Лунитов', price: 4330, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '24', title: '6480 Лунитов', price: 8420, description: "Товар на скидке", img: "/images/lunite.webp", category: 'wuwa'},
+    {id: '25', title: 'Insider Channel', price: 930, description: "Товар на скидке", img: "/images/insider-channel.webp", category: 'wuwa'},
+    {id: '26', title: 'Connoisseur Channel', price: 1750, description: "Товар на скидке", img: "/images/connoisseur-channel.webp", category: 'wuwa'},
+
+    {id: '27', title: 'Бравл Пасс', price: 570, description: "Товар на скидке", img: "/images/brawl-pass.webp", category: 'brawl'},
+    {id: '28', title: 'Бравл Пасс Плюс', price: 840, description: "Товар на скидке", img: "/images/brawl-pass-plus.webp", category: 'brawl'},
+    {id: '29', title: '30 Гемов', price: 200, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+    {id: '30', title: '80 Гемов', price: 460, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+    {id: '31', title: '170 Гемов', price: 830, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+    {id: '32', title: '360 Гемов', price: 1600, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+    {id: '33', title: '950 Гемов', price: 3800, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+    {id: '34', title: '2000 Гемов', price: 7540, description: "Товар на скидке", img: "/images/gems.webp", category: 'brawl'},
+
+    {id: '35', title: 'Pass Royale Gold', price: 545, description: "Товар на скидке", img: "/images/pass-royale-gold.png", category: 'royale'},
+    {id: '36', title: 'Pass Royale Diamond', price: 1020, description: "Товар на скидке", img: "/images/pass-royale-diamond.png", category: 'royale'},
+    {id: '37', title: '80 Royale Gems', price: 100, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+    {id: '38', title: '500 Royale Gems', price: 430, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+    {id: '39', title: '1200 Royale Gems', price: 835, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+    {id: '40', title: '2500 Royale Gems', price: 1600, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+    {id: '41', title: '6500 Royale Gems', price: 3800, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+    {id: '42', title: '14000 Royale Gems', price: 7540, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
+
+    {id: '43', title: 'Clash Royale Gold', price: 545, description: "Товар на скидке", img: "/images/pass-royale-gold.png", category: 'royale'},
+
+
 ];
 
 const getTotalPrice = (items = []) => {
@@ -17,10 +65,11 @@ const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('All');
     const { tg, queryId } = useTelegram();
 
-    const onSendData = useCallback( () =>{
-        const data ={
+    const onSendData = useCallback(() => {
+        const data = {
             product: addedItems,
             totalPrice: getTotalPrice(addedItems),
             queryId,
@@ -34,14 +83,12 @@ const ProductList = () => {
         })
     }, [addedItems])
 
-    
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData, tg] )
-
+    }, [onSendData, tg])
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
@@ -65,16 +112,42 @@ const ProductList = () => {
         }
     }
 
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    }
+
+    const filteredProducts = selectedCategory === 'All'
+        ? products
+        : products.filter(product => product.category === selectedCategory);
+
     return (
-        <div className={'list'}>
-            {products.map(item => (
-                <ProductItem
-                    key={item.id}
-                    product={item}
-                    onAdd={onAdd}
-                    className={'item'}
-                />
-            ))}
+        <div>
+            <div className="filter">
+                <label htmlFor="category">Select Category: </label>
+                <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+                    <option value="All">All</option>
+                    <option value="lol">League of Legends</option>
+                    <option value="genshin">Genshin Impact</option>
+                    <option value="wuwa">Wuthering Waves</option>
+                    <option value="brawl">Brawl Stars</option>
+                    <option value="royale">Clash Royale</option>
+                    <option value="clans">Clash of Clans</option>
+                    <option value="honkai">Honkai Star Rail</option>
+                    <option value="nitro">Dicord Nitro</option>
+                    <option value="accessories">Dicord Accessories</option>
+                    
+                </select>
+            </div>
+            <div className={'list'}>
+                {filteredProducts.map(item => (
+                    <ProductItem
+                        key={item.id}
+                        product={item}
+                        onAdd={onAdd}
+                        className={'item'}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

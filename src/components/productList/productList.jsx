@@ -70,7 +70,24 @@ const products = [
     {id: '57', title: 'Слава Безымянных', price: 1020, description: "Товар на скидке", img: "/images/slava-nameless.webp", category: 'honkai'},
     {id: '58', title: 'Честь Безымянных', price: 2020, description: "Товар на скидке", img: "/images/chest-nameless.webp", category: 'honkai'},
 
+    {id: '59', title: 'Смена Региона', price: 200, description: "Смена региона на Украину", img: "/images/steam-logo.png", category: 'steam'},
 
+    {id: '60', title: 'Discord Nitro Classic Month', price: 165, img: "/images/nitro-classic.png", category: 'discord'},
+    {id: '61', title: 'Discord Nitro Classic Year', price: 1350, img: "/images/nitro-classic.png", category: 'discord'},
+    {id: '62', title: 'Discord Nitro Full Month', price: 345, img: "/images/nitro-full.webp", category: 'discord'},
+    {id: '63', title: 'Discord Nitro Full Year', price: 3300, img: "/images/nitro-full.webp", category: 'discord'},
+
+    {id: '64', title: 'Discord Коллекция Palword', price: 310, img: "/images/palword.png", category: 'nitro-accessories'},
+    {id: '65', title: 'Discord Коллекция Galaxy', price: 205, img: "/images/galaxy.png", category: 'nitro-accessories'},
+    {id: '66', title: 'Discord Коллекция Anime', price: 230, img: "/images/anime.png", category: 'nitro-accessories'},
+    {id: '67', title: 'Discord Коллекция Lofy Vibes', price: 205, img: "/images/lofi.png", category: 'nitro-accessories'},
+    {id: '68', title: 'Discord Коллекция Fantasy', price: 260, img: "/images/fantasy.png", category: 'nitro-accessories'},
+    {id: '69', title: 'Discord Коллекция Cyberpunk', price: 205, img: "/images/cyberpunk.png", category: 'nitro-accessories'},
+    {id: '70', title: 'Discord Коллекция Elements', price: 205, img: "/images/elements.png", category: 'nitro-accessories'},
+    {id: '71', title: 'Discord Коллекция Pirates', price: 205, img: "/images/pirates.png", category: 'nitro-accessories'},
+    {id: '72', title: 'Discord Коллекция Arcade', price: 205, img: "/images/arcade.png", category: 'nitro-accessories'},
+    {id: '73', title: 'Discord Коллекция SpringToons', price: 205, img: "/images/springtoons.png", category: 'nitro-accessories'},
+    {id: '74', title: "Discord Коллекция Feelin' Retro ", price: 205, img: "/images/retro.png", category: 'nitro-accessories'},
 
 
 ];
@@ -91,31 +108,32 @@ const ProductList = () => {
             product: addedItems,
             totalPrice: getTotalPrice(addedItems),
             queryId,
-        }
+        };
         fetch("http://localhost:8000/web-data", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data)
-        })
-    }, [addedItems])
+            body: JSON.stringify(data),
+        });
+    }, [addedItems, queryId]);
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
+        tg.onEvent('mainButtonClicked', onSendData);
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData, tg])
+            tg.offEvent('mainButtonClicked', onSendData);
+        };
+    }, [onSendData, tg]);
 
-    const onAdd = (product) => {
+    const onAdd = (product, hasNitro) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
 
         if (alreadyAdded) {
             newItems = addedItems.filter(item => item.id !== product.id);
         } else {
-            newItems = [...addedItems, product];
+            const adjustedPrice = hasNitro && product.category === 'nitro-accessories' ? product.nitroPrice : product.price;
+            newItems = [...addedItems, { ...product, price: adjustedPrice }];
         }
 
         setAddedItems(newItems);
@@ -125,18 +143,28 @@ const ProductList = () => {
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`
+                text: `Купить ${getTotalPrice(newItems)}`,
             });
         }
-    }
+    };
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
-    }
+    };
 
     const filteredProducts = selectedCategory === 'All'
         ? products
         : products.filter(product => product.category === selectedCategory);
+
+    const handlePriceChange = (product, hasNitro) => {
+        const updatedProducts = addedItems.map(item => {
+            if (item.id === product.id && item.category === 'nitro-accessories') {
+                return { ...item, price: hasNitro ? product.nitroPrice : product.price };
+            }
+            return item;
+        });
+        setAddedItems(updatedProducts);
+    };
 
     return (
         <div>
@@ -149,26 +177,35 @@ const ProductList = () => {
                     <option value="wuwa">Wuthering Waves</option>
                     <option value="brawl">Brawl Stars</option>
                     <option value="royale">Clash Royale</option>
-                    <option value="clans">Clash of Clans</option>
+                    <option value="clash">Clash of Clans</option>
                     <option value="honkai">Honkai Star Rail</option>
-                    <option value="nitro">Dicord Nitro</option>
-                    <option value="accessories">Dicord Accessories</option>
+                    <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                    <option value="accessories">Discord Accessories (без Nitro)</option>
                     <option value="steam">Steam Games</option>
-                    
                 </select>
             </div>
             <div className={'list'}>
                 {filteredProducts.map(item => (
-                    <ProductItem
-                        key={item.id}
-                        product={item}
-                        onAdd={onAdd}
-                        className={'item'}
-                    />
+                    <div key={item.id}>
+                        <ProductItem
+                            product={item}
+                            onAdd={(hasNitro) => onAdd(item, hasNitro)}
+                            className={'item'}
+                        />
+                        {/* {item.category === 'nitro-accessories' && (
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    onChange={(e) => handlePriceChange(item, e.target.checked)}
+                                />
+                                У меня есть Discord Nitro
+                            </label>
+                        )} */}
+                    </div>
                 ))}
             </div>
         </div>
     );
-}
+};
 
 export default ProductList;

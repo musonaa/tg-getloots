@@ -70,7 +70,7 @@ const products = [
     {id: '57', title: 'Слава Безымянных', price: 1020, description: "Товар на скидке", img: "/images/slava-nameless.webp", category: 'honkai'},
     {id: '58', title: 'Честь Безымянных', price: 2020, description: "Товар на скидке", img: "/images/chest-nameless.webp", category: 'honkai'},
 
-    
+
 
 
 ];
@@ -153,6 +153,7 @@ const ProductList = () => {
                     <option value="honkai">Honkai Star Rail</option>
                     <option value="nitro">Dicord Nitro</option>
                     <option value="accessories">Dicord Accessories</option>
+                    <option value="steam">Steam Games</option>
                     
                 </select>
             </div>

@@ -52,7 +52,25 @@ const products = [
     {id: '41', title: '6500 Royale Gems', price: 3800, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
     {id: '42', title: '14000 Royale Gems', price: 7540, description: "Товар на скидке", img: "/images/royale-gems.webp", category: 'royale'},
 
-    {id: '43', title: 'Clash Royale Gold', price: 545, description: "Товар на скидке", img: "/images/pass-royale-gold.png", category: 'royale'},
+    {id: '43', title: 'Clash Royale Gold', price: 600, description: "Со скидкой - 300", img: "/images/clash-pass.webp", category: 'clash'},
+    {id: '44', title: '80 Clash Gems', price: 100, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+    {id: '45', title: '500 Clash Gems', price: 430, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+    {id: '46', title: '1200 Clash Gems', price: 835, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+    {id: '47', title: '2500 Clash Gems', price: 1600, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+    {id: '48', title: '6500 Clash Gems', price: 3800, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+    {id: '49', title: '14000 Clash Gems', price: 7540, description: "Товар на скидке", img: "/images/clash-gems.png", category: 'clash'},
+
+    {id: '50', title: 'Снабжение експресса', price: 435, description: "Товар на скидке", img: "/images/express.webp", category: 'honkai'},
+    {id: '51', title: '60 Нефритов', price: 120, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '52', title: '300 Нефритов', price: 570, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '53', title: '980 Нефритов', price: 1550, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '54', title: '1980 Нефритов', price: 3000, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '55', title: '3280 Нефритов', price: 5000, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '56', title: '6480 Нефритов', price: 9750, description: "Товар на скидке", img: "/images/nefrit.webp", category: 'honkai'},
+    {id: '57', title: 'Слава Безымянных', price: 1020, description: "Товар на скидке", img: "/images/slava-nameless.webp", category: 'honkai'},
+    {id: '58', title: 'Честь Безымянных', price: 2020, description: "Товар на скидке", img: "/images/chest-nameless.webp", category: 'honkai'},
+
+    
 
 
 ];

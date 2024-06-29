@@ -1,5 +1,6 @@
 import React from 'react';
 import './cart.css';
+import Button from '../button/button';
 
 const Cart = ({ items, onRemove, onPay, onClose }) => {
     return (
@@ -15,16 +16,16 @@ const Cart = ({ items, onRemove, onPay, onClose }) => {
                                 <img src={item.img} alt={item.title} />
                                 <div>{item.title}</div>
                                 <div>{item.price} руб</div>
-                                <button onClick={() => onRemove(item.id)}>Удалить</button>
+                                <Button onClick={() => onRemove(item.id)}>Удалить</Button>
                             </div>
                         </li>
                     ))}
                 </ul>
             )}
             {items.length > 0 && (
-                <button onClick={onPay} className="pay-btn">Оплатить {items.reduce((acc, item) => acc + item.price, 0)} руб</button>
+                <Button onClick={onPay} className="pay-btn">Оплатить {items.reduce((acc, item) => acc + item.price, 0)} руб</Button>
             )}
-            <button onClick={onClose} className="close-btn">Назад</button>
+            <Button onClick={onClose} className="close-btn">Назад</Button>
         </div>
     );
 }

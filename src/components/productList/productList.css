@@ -26,3 +26,15 @@
 label{
     margin-left: 12px;
 }
+
+.cart-btn {
+    margin: 20px auto;
+    display: block;
+    padding: 10px;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}

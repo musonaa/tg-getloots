@@ -129,7 +129,8 @@ const getTotalPrice = (items = []) => {
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [isCartVisible, setCartVisible] = useState(false); // State for cart visibility
+    const [isCartVisible, setCartVisible] = useState(false); 
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -209,6 +210,26 @@ const ProductList = () => {
         setCartVisible(false);
     };
 
+    const handleScroll = () => {
+        if (window.pageYOffset > 300) {
+            setShowScrollToTop(true);
+        } else {
+            setShowScrollToTop(false);
+        }
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
     return (
         <div>
             {isCartVisible ? (
@@ -221,7 +242,7 @@ const ProductList = () => {
             ) : (
                 <div>
                     <div className="filter">
-                        <label htmlFor="category">Ваш Продукт: </label>
+                        <label htmlFor="category">Продукт: </label>
                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
                             <option value="All">All</option>
                             <option value="lol">League of Legends</option>
@@ -250,6 +271,8 @@ const ProductList = () => {
                             </div>
                         ))}
                     </div>
+                    <button className="scroll-to-top-btn" onClick={scrollToTop} style={{ display: showScrollToTop ? 'block' : 'none' }}>↑</button>
+
                 </div>
             )}
         </div>

@@ -89,7 +89,34 @@ const products = [
     {id: '72', title: 'Discord Коллекция Arcade', price: 205, img: "/images/arcade.png", category: 'nitro-accessories'},
     {id: '73', title: 'Discord Коллекция SpringToons', price: 205, img: "/images/springtoons.png", category: 'nitro-accessories'},
     {id: '74', title: "Discord Коллекция Feelin' Retro ", price: 205, img: "/images/retro.png", category: 'nitro-accessories'},
-
+    {id: '75', title: "Discord Еффект Волшебные сердца ", price: 310, img: "/images/magic-hearts.png", category: 'nitro-accessories'},
+    {id: '76', title: "Discord Еффект Осколок ", price: 310, img: "/images/oskolok.png", category: 'nitro-accessories'},
+    {id: '77', title: "Discord Еффект Сюрикен ", price: 310, img: "/images/suriken.png", category: 'nitro-accessories'},
+    {id: '78', title: "Discord Еффект Пиковая мощность ", price: 310, img: "/images/pickovaya.png", category: 'nitro-accessories'},
+    {id: '79', title: "Discord Еффект Безмятежная сакура ", price: 310, img: "/images/sakura.png", category: 'nitro-accessories'},
+    {id: '80', title: "Discord Еффект Водяной заряд ", price: 310, img: "/images/water.png", category: 'nitro-accessories'},
+    {id: '81', title: "Discord Еффект Таинственные лозы ", price: 310, img: "/images/lozy.png", category: 'nitro-accessories'},
+    {id: '82', title: "Discord Еффект Пыльца пикси ", price: 310, img: "/images/piksi.png", category: 'nitro-accessories'},
+    
+    {id: '83', title: 'Discord Коллекция Palword', price: 350, img: "/images/palword.png", category: 'accessories'},
+    {id: '84', title: 'Discord Коллекция Galaxy', price: 235, img: "/images/galaxy.png", category: 'accessories'},
+    {id: '85', title: 'Discord Коллекция Anime', price: 295, img: "/images/anime.png", category: 'accessories'},
+    {id: '86', title: 'Discord Коллекция Lofy Vibes', price: 235, img: "/images/lofi.png", category: 'accessories'},
+    {id: '87', title: 'Discord Коллекция Fantasy', price: 350, img: "/images/fantasy.png", category: 'accessories'},
+    {id: '88', title: 'Discord Коллекция Cyberpunk', price: 235, img: "/images/cyberpunk.png", category: 'accessories'},
+    {id: '89', title: 'Discord Коллекция Elements', price: 235, img: "/images/elements.png", category: 'accessories'},
+    {id: '90', title: 'Discord Коллекция Pirates', price: 235, img: "/images/pirates.png", category: 'accessories'},
+    {id: '91', title: 'Discord Коллекция Arcade', price: 235, img: "/images/arcade.png", category: 'accessories'},
+    {id: '92', title: 'Discord Коллекция SpringToons', price: 235, img: "/images/springtoons.png", category: 'accessories'},
+    {id: '93', title: "Discord Коллекция Feelin' Retro ", price: 235, img: "/images/retro.png", category: 'accessories'},
+    {id: '94', title: "Discord Еффект Волшебные сердца ", price: 400, img: "/images/magic-hearts.png", category: 'accessories'},
+    {id: '95', title: "Discord Еффект Осколок ", price: 400, img: "/images/oskolok.png", category: 'accessories'},
+    {id: '96', title: "Discord Еффект Сюрикен ", price: 400, img: "/images/suriken.png", category: 'accessories'},
+    {id: '97', title: "Discord Еффект Пиковая мощность ", price: 400, img: "/images/pickovaya.png", category: 'accessories'},
+    {id: '98', title: "Discord Еффект Безмятежная сакура ", price: 400, img: "/images/sakura.png", category: 'accessories'},
+    {id: '99', title: "Discord Еффект Водяной заряд ", price: 400, img: "/images/water.png", category: 'accessories'},
+    {id: '100', title: "Discord Еффект Таинственные лозы ", price: 400, img: "/images/lozy.png", category: 'accessories'},
+    {id: '101', title: "Discord Еффект Пыльца пикси ", price: 400, img: "/images/piksi.png", category: 'accessories'},
 
 ];
 
@@ -98,219 +125,6 @@ const getTotalPrice = (items = []) => {
         return acc + item.price;
     }, 0);
 }
-//cart version
-// const ProductList = () => {
-//     const [addedItems, setAddedItems] = useState([]);
-//     const [selectedCategory, setSelectedCategory] = useState('All');
-//     const [isCartVisible, setCartVisible] = useState(false); // State for cart visibility
-//     const { tg, queryId } = useTelegram();
-
-//     const onSendData = useCallback(() => {
-//         const data = {
-//             product: addedItems,
-//             totalPrice: getTotalPrice(addedItems),
-//             queryId,
-//         };
-//         fetch("http://localhost:8000/web-data", {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         });
-//     }, [addedItems, queryId]);
-
-//     useEffect(() => {
-//         tg.onEvent('mainButtonClicked', onSendData);
-//         return () => {
-//             tg.offEvent('mainButtonClicked', onSendData);
-//         };
-//     }, [onSendData, tg]);
-
-//     const onAdd = (product) => {
-//         const alreadyAdded = addedItems.find(item => item.id === product.id);
-//         let newItems = [];
-
-//         if (alreadyAdded) {
-//             newItems = addedItems.filter(item => item.id !== product.id);
-//         } else {
-//             newItems = [...addedItems, product];
-//         }
-
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.show();
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handleCategoryChange = (event) => {
-//         setSelectedCategory(event.target.value);
-//     };
-
-//     const filteredProducts = selectedCategory === 'All'
-//         ? products
-//         : products.filter(product => product.category === selectedCategory);
-
-//     const toggleCart = () => {
-//         setCartVisible(!isCartVisible);
-//     };
-
-//     const handleRemove = (id) => {
-//         const newItems = addedItems.filter(item => item.id !== id);
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handlePay = () => {
-//         onSendData();
-//     };
-
-//     return (
-//         <div>
-//             <div className="filter">
-//                 <label htmlFor="category">Ваш Продукт: </label>
-//                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-//                     <option value="All">All</option>
-//                     <option value="lol">League of Legends</option>
-//                     <option value="genshin">Genshin Impact</option>
-//                     <option value="wuwa">Wuthering Waves</option>
-//                     <option value="brawl">Brawl Stars</option>
-//                     <option value="royale">Clash Royale</option>
-//                     <option value="clash">Clash of Clans</option>
-//                     <option value="honkai">Honkai Star Rail</option>
-//                     <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-//                     <option value="accessories">Discord Accessories (без Nitro)</option>
-//                     <option value="steam">Steam Games</option>
-//                 </select>
-//             </div>
-//             <button onClick={toggleCart} className="cart-btn">
-//                 {isCartVisible ? 'Скрыть корзину' : 'Показать корзину'}
-//             </button>
-//             <div className={'list'}>
-//                 {filteredProducts.map(item => (
-//                     <div key={item.id}>
-//                         <ProductItem
-//                             product={item}
-//                             onAdd={() => onAdd(item)}
-//                             className={'item'}
-//                         />
-//                     </div>
-//                 ))}
-//             </div>
-//             {isCartVisible && (
-//                 <Cart items={addedItems} onRemove={handleRemove} onPay={handlePay} />
-//             )}
-//         </div>
-//     );
-// };
-
-// export default ProductList;
-
-// const ProductList = () => {
-//     const [addedItems, setAddedItems] = useState([]);
-//     const [selectedCategory, setSelectedCategory] = useState('All');
-//     const [isCartVisible, setCartVisible] = useState(false);
-//     const { tg, queryId } = useTelegram();
-
-//     const onSendData = useCallback(() => {
-//         const data = {
-//             product: addedItems,
-//             totalPrice: getTotalPrice(addedItems),
-//             queryId,
-//         };
-//         fetch("http://localhost:8000/web-data", {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         });
-//     }, [addedItems, queryId]);
-
-//     useEffect(() => {
-//         tg.onEvent('mainButtonClicked', onSendData);
-//         return () => {
-//             tg.offEvent('mainButtonClicked', onSendData);
-//         };
-//     }, [onSendData, tg]);
-
-//     const onAdd = (product) => {
-//         const alreadyAdded = addedItems.find(item => item.id === product.id);
-//         let newItems = [];
-
-//         if (alreadyAdded) {
-//             newItems = addedItems.filter(item => item.id !== product.id);
-//         } else {
-//             newItems = [...addedItems, product];
-//         }
-
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.show();
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handleCategoryChange = (event) => {
-//         setSelectedCategory(event.target.value);
-//     };
-
-//     const filteredProducts = selectedCategory === 'All'
-//         ? products
-//         : products.filter(product => product.category === selectedCategory);
-
-//     return (
-//         <div>
-//             <div className="filter">
-//                 <label htmlFor="category">Ваш Продукт: </label>
-//                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-//                     <option value="All">All</option>
-//                     <option value="lol">League of Legends</option>
-//                     <option value="genshin">Genshin Impact</option>
-//                     <option value="wuwa">Wuthering Waves</option>
-//                     <option value="brawl">Brawl Stars</option>
-//                     <option value="royale">Clash Royale</option>
-//                     <option value="clash">Clash of Clans</option>
-//                     <option value="honkai">Honkai Star Rail</option>
-//                     <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-//                     <option value="accessories">Discord Accessories (без Nitro)</option>
-//                     <option value="steam">Steam Games</option>
-//                 </select>
-//             </div>
-//             <div className="list">
-//                 {filteredProducts.map(item => (
-//                     <div key={item.id}>
-//                         <ProductItem
-//                             product={item}
-//                             onAdd={() => onAdd(item)}
-//                             className="item"
-//                         />
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default ProductList;
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);

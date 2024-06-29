@@ -169,7 +169,7 @@ const ProductList = () => {
     return (
         <div>
             <div className="filter">
-                <label htmlFor="category" className='toselect'>Ваш Продукт: </label>
+                <label htmlFor="category" className=''>Select Category: </label>
                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
                     <option value="All">All</option>
                     <option value="lol">League of Legends</option>
@@ -181,7 +181,7 @@ const ProductList = () => {
                     <option value="honkai">Honkai Star Rail</option>
                     <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
                     <option value="accessories">Discord Accessories (без Nitro)</option>
-                    <option value="steam">Steam</option>
+                    <option value="steam">Steam Games</option>
                 </select>
             </div>
             <div className={'list'}>

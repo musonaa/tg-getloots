@@ -12,10 +12,10 @@
     justify-content: center;
 } */
 .button {
-    margin: 8px;
-    /* padding-top: 12px;
+    margin-top: 4px;
+    padding-top: 12px;
     padding-bottom: 12px;
-    padding-left: 6px; */
+    padding-left: 0px; 
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     border: none;
@@ -27,3 +27,11 @@
     align-items: center;
     text-align: center;
 }
+/* .button{
+    padding: 10px 15px;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    outline: none;
+    cursor: pointer;
+} */

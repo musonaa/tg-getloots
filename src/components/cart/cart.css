@@ -1,12 +1,15 @@
 /* cart.css */
 .cart {
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #fff;
     position: fixed;
-    right: 20px;
-    top: 100px;
-    width: 300px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
 }
 
@@ -17,6 +20,9 @@
 .cart ul {
     list-style-type: none;
     padding: 0;
+    margin: 20px 0;
+    width: 80%;
+    max-width: 500px;
 }
 
 .cart-item {
@@ -33,7 +39,7 @@
     margin-right: 10px;
 }
 
-.pay-btn {
+.pay-btn, .close-btn {
     margin-top: 10px;
     padding: 10px;
     background-color: var(--tg-theme-button-color);
@@ -41,7 +47,13 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close-btn {
+    background-color: #ccc;
+    color: #000;
 }
 
 .cart-btn {
@@ -52,4 +64,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 80%;
+    max-width: 500px;
 }

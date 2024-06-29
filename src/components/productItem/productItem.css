@@ -35,13 +35,6 @@
     margin-bottom: 36px;
 }
 
-.product.nitro-accessories .img img,
-.product.clash .img img,
-.product.royale .img img{
-    height: 30px; 
-    object-fit: contain;
-}
-
 .reduced-height {
     height: 30px;
   }

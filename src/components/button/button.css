@@ -12,7 +12,7 @@
     justify-content: center;
 } */
 .button {
-    margin-top: 4px;
+    margin-top: 8px;
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 0px; 
@@ -27,11 +27,4 @@
     align-items: center;
     text-align: center;
 }
-/* .button{
-    padding: 10px 15px;
-    background: var(--tg-theme-button-color);
-    color: var(--tg-theme-button-text-color);
-    border: none;
-    outline: none;
-    cursor: pointer;
-} */
+

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './productList.css';
 import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
+import Cart from '../cart/cart';
 
 const products = [
 
@@ -98,112 +99,10 @@ const getTotalPrice = (items = []) => {
     }, 0);
 }
 
-// const ProductList = () => {
-//     const [addedItems, setAddedItems] = useState([]);
-//     const [selectedCategory, setSelectedCategory] = useState('All');
-//     const { tg, queryId } = useTelegram();
-
-//     const onSendData = useCallback(() => {
-//         const data = {
-//             product: addedItems,
-//             totalPrice: getTotalPrice(addedItems),
-//             queryId,
-//         };
-//         fetch("http://localhost:8000/web-data", {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         });
-//     }, [addedItems, queryId]);
-
-//     useEffect(() => {
-//         tg.onEvent('mainButtonClicked', onSendData);
-//         return () => {
-//             tg.offEvent('mainButtonClicked', onSendData);
-//         };
-//     }, [onSendData, tg]);
-
-//     const onAdd = (product, hasNitro) => {
-//         const alreadyAdded = addedItems.find(item => item.id === product.id);
-//         let newItems = [];
-
-//         if (alreadyAdded) {
-//             newItems = addedItems.filter(item => item.id !== product.id);
-//         } else {
-//             //const adjustedPrice = hasNitro && product.category === 'nitro-accessories' ? product.nitroPrice : product.price;
-//             newItems = [...addedItems, { ...product, price: adjustedPrice }];
-//         }
-
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.show();
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handleCategoryChange = (event) => {
-//         setSelectedCategory(event.target.value);
-//     };
-
-//     const filteredProducts = selectedCategory === 'All'
-//         ? products
-//         : products.filter(product => product.category === selectedCategory);
-
-//     const handlePriceChange = (product, hasNitro) => {
-//         const updatedProducts = addedItems.map(item => {
-//             if (item.id === product.id && item.category === 'nitro-accessories') {
-//                 return { ...item, price: hasNitro ? product.nitroPrice : product.price };
-//             }
-//             return item;
-//         });
-//         setAddedItems(updatedProducts);
-//     };
-
-//     return (
-//         <div>
-//             <div className="filter">
-//                 <label htmlFor="category" className=''>Ваш Продукт: </label>
-//                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-//                     <option value="All">All</option>
-//                     <option value="lol">League of Legends</option>
-//                     <option value="genshin">Genshin Impact</option>
-//                     <option value="wuwa">Wuthering Waves</option>
-//                     <option value="brawl">Brawl Stars</option>
-//                     <option value="royale">Clash Royale</option>
-//                     <option value="clash">Clash of Clans</option>
-//                     <option value="honkai">Honkai Star Rail</option>
-//                     <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-//                     <option value="accessories">Discord Accessories (без Nitro)</option>
-//                     <option value="steam">Steam Games</option>
-//                 </select>
-//             </div>
-//             <div className={'list'}>
-//                 {filteredProducts.map(item => (
-//                     <div key={item.id}>
-//                         <ProductItem
-//                             product={item}
-//                             onAdd={(hasNitro) => onAdd(item, hasNitro)}
-//                             className={'item'}
-//                         />
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default ProductList;
-
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [isCartVisible, setCartVisible] = useState(false); // State for cart visibility
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -258,6 +157,27 @@ const ProductList = () => {
         ? products
         : products.filter(product => product.category === selectedCategory);
 
+    const toggleCart = () => {
+        setCartVisible(!isCartVisible);
+    };
+
+    const handleRemove = (id) => {
+        const newItems = addedItems.filter(item => item.id !== id);
+        setAddedItems(newItems);
+
+        if (newItems.length === 0) {
+            tg.MainButton.hide();
+        } else {
+            tg.MainButton.setParams({
+                text: `Купить ${getTotalPrice(newItems)}`,
+            });
+        }
+    };
+
+    const handlePay = () => {
+        onSendData();
+    };
+
     return (
         <div>
             <div className="filter">
@@ -276,19 +196,118 @@ const ProductList = () => {
                     <option value="steam">Steam Games</option>
                 </select>
             </div>
-            <div className="list">
+            <button onClick={toggleCart} className="cart-btn">
+                {isCartVisible ? 'Скрыть корзину' : 'Показать корзину'}
+            </button>
+            <div className={'list'}>
                 {filteredProducts.map(item => (
                     <div key={item.id}>
                         <ProductItem
                             product={item}
                             onAdd={() => onAdd(item)}
-                            className="item"
+                            className={'item'}
                         />
                     </div>
                 ))}
             </div>
+            {isCartVisible && (
+                <Cart items={addedItems} onRemove={handleRemove} onPay={handlePay} />
+            )}
         </div>
     );
 };
 
 export default ProductList;
+
+// const ProductList = () => {
+//     const [addedItems, setAddedItems] = useState([]);
+//     const [selectedCategory, setSelectedCategory] = useState('All');
+//     const [isCartVisible, setCartVisible] = useState(false);
+//     const { tg, queryId } = useTelegram();
+
+//     const onSendData = useCallback(() => {
+//         const data = {
+//             product: addedItems,
+//             totalPrice: getTotalPrice(addedItems),
+//             queryId,
+//         };
+//         fetch("http://localhost:8000/web-data", {
+//             method: 'POST',
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(data),
+//         });
+//     }, [addedItems, queryId]);
+
+//     useEffect(() => {
+//         tg.onEvent('mainButtonClicked', onSendData);
+//         return () => {
+//             tg.offEvent('mainButtonClicked', onSendData);
+//         };
+//     }, [onSendData, tg]);
+
+//     const onAdd = (product) => {
+//         const alreadyAdded = addedItems.find(item => item.id === product.id);
+//         let newItems = [];
+
+//         if (alreadyAdded) {
+//             newItems = addedItems.filter(item => item.id !== product.id);
+//         } else {
+//             newItems = [...addedItems, product];
+//         }
+
+//         setAddedItems(newItems);
+
+//         if (newItems.length === 0) {
+//             tg.MainButton.hide();
+//         } else {
+//             tg.MainButton.show();
+//             tg.MainButton.setParams({
+//                 text: `Купить ${getTotalPrice(newItems)}`,
+//             });
+//         }
+//     };
+
+//     const handleCategoryChange = (event) => {
+//         setSelectedCategory(event.target.value);
+//     };
+
+//     const filteredProducts = selectedCategory === 'All'
+//         ? products
+//         : products.filter(product => product.category === selectedCategory);
+
+//     return (
+//         <div>
+//             <div className="filter">
+//                 <label htmlFor="category">Ваш Продукт: </label>
+//                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+//                     <option value="All">All</option>
+//                     <option value="lol">League of Legends</option>
+//                     <option value="genshin">Genshin Impact</option>
+//                     <option value="wuwa">Wuthering Waves</option>
+//                     <option value="brawl">Brawl Stars</option>
+//                     <option value="royale">Clash Royale</option>
+//                     <option value="clash">Clash of Clans</option>
+//                     <option value="honkai">Honkai Star Rail</option>
+//                     <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+//                     <option value="accessories">Discord Accessories (без Nitro)</option>
+//                     <option value="steam">Steam Games</option>
+//                 </select>
+//             </div>
+//             <div className="list">
+//                 {filteredProducts.map(item => (
+//                     <div key={item.id}>
+//                         <ProductItem
+//                             product={item}
+//                             onAdd={() => onAdd(item)}
+//                             className="item"
+//                         />
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default ProductList;

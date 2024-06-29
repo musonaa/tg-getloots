@@ -229,7 +229,6 @@ const ProductList = () => {
         };
     }, []);
 
-
     return (
         <div>
             {isCartVisible ? (
@@ -249,31 +248,24 @@ const ProductList = () => {
                             <option value="genshin">Genshin Impact</option>
                             <option value="wuwa">Wuthering Waves</option>
                             <option value="brawl">Brawl Stars</option>
-                            <option value="royale">Clash Royale</option>
-                            <option value="clash">Clash of Clans</option>
-                            <option value="honkai">Honkai Star Rail</option>
-                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-                            <option value="accessories">Discord Accessories (без Nitro)</option>
-                            <option value="steam">Steam Games</option>
+                            {/* Add other options */}
                         </select>
                     </div>
-                    <button onClick={toggleCart} className="cart-btn">
-                        Показать корзину
-                    </button>
-                    <div className={'list'}>
-                        {filteredProducts.map(item => (
-                            <div key={item.id}>
-                                <ProductItem
-                                    product={item}
-                                    onAdd={() => onAdd(item)}
-                                    className={'item'}
-                                />
-                            </div>
+                    <div className="product-list">
+                        {filteredProducts.map(product => (
+                            <ProductItem
+                                key={product.id}
+                                product={product}
+                                onAdd={onAdd}
+                            />
                         ))}
                     </div>
-                    <button className="scroll-to-top-btn" onClick={scrollToTop} style={{ display: showScrollToTop ? 'block' : 'none' }}>↑</button>
-
                 </div>
+            )}
+            {showScrollToTop && (
+                <button className="scroll-to-top" onClick={scrollToTop}>
+                    ↑
+                </button>
             )}
         </div>
     );

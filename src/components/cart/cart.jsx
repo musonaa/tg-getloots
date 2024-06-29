@@ -16,7 +16,8 @@ const Cart = ({ items, onRemove, onPay, onClose }) => {
                                 <img src={item.img} alt={item.title} />
                                 <div>{item.title}</div>
                                 <div>{item.price} руб</div>
-                                <Button onClick={() => onRemove(item.id)}>🗑️</Button>
+                                {/* 🗑️ */}
+                                <button onClick={() => onRemove(item.id)} className='trash'><img src="/images/trash.png" alt="trash" /></button>
                             </div>
                         </li>
                     ))}

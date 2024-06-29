@@ -51,10 +51,10 @@
     max-width: 500px;
 }
 
-.close-btn {
+/* .close-btn {
     background-color: #ccc;
     color: #000;
-}
+} */
 
 .cart-btn {
     margin: 10px 0;
@@ -66,4 +66,11 @@
     cursor: pointer;
     width: 80%;
     max-width: 500px;
+}
+
+.trash{
+    color: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

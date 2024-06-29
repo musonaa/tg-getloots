@@ -271,9 +271,9 @@ const ProductList = () => {
                 </div>
             )}
             {showScrollToTop && (
-                <Button className="scroll-to-top" onClick={scrollToTop}>
+                <button className="scroll-to-top" onClick={scrollToTop}>
                     ↑
-                </Button>
+                </button>
             )}
         </div>
     );

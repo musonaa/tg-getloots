@@ -1,7 +1,8 @@
 .button{
     margin: 8px;
-    padding-top: 8px;
-    padding-left: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 6px;
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     border: none;

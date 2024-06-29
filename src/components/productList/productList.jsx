@@ -169,7 +169,7 @@ const ProductList = () => {
     return (
         <div>
             <div className="filter">
-                <label htmlFor="category">Select Category: </label>
+                <label htmlFor="category" className='toselect'>Выберите Продукт: </label>
                 <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
                     <option value="All">All</option>
                     <option value="lol">League of Legends</option>

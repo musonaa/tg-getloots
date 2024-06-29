@@ -34,36 +34,12 @@ import Button from '../button/button';
 
 const ProductItem = ({ product, className, onAdd }) => {
 
-    // const getProductClassName = (productTitle) => {
-    //     let productClass = '';
-    //     switch (productTitle.toLowerCase()) {
-    //         case 'nitro accessories':
-    //             productClass = 'nitro-accessories';
-    //             break;
-    //         case 'clash':
-    //             productClass = 'clash';
-    //             break;
-    //         case 'royale':
-    //             productClass = 'royale';
-    //             break;
-    //         case 'clash royale gems':
-    //             productClass = 'clash-royale-gems';
-    //             break;
-    //         default:
-    //             productClass = '';
-    //             break;
-    //     }
-    //     return productClass;
-    // }
-
     const onAddHandler = () => {
         onAdd(product);
     }
 
-    //const productClass = getProductClassName(product.title);
-
     return (
-        <div className={`product ${productClass} ${className}`}>
+        <div className={`product ${className}`}>
             {/* <div className="img" style={{ height: productClass === 'nitro-accessories' && productClass === 'clash' && productClass === 'royale' ? '100px' : '30px' }}>  */}
             <div className="img"> 
                 <img src={product.img} alt={product.title} />

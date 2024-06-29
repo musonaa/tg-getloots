@@ -132,7 +132,7 @@ const ProductList = () => {
         if (alreadyAdded) {
             newItems = addedItems.filter(item => item.id !== product.id);
         } else {
-            const adjustedPrice = hasNitro && product.category === 'nitro-accessories' ? product.nitroPrice : product.price;
+            //const adjustedPrice = hasNitro && product.category === 'nitro-accessories' ? product.nitroPrice : product.price;
             newItems = [...addedItems, { ...product, price: adjustedPrice }];
         }
 

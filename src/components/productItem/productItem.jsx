@@ -34,33 +34,33 @@ import Button from '../button/button';
 
 const ProductItem = ({ product, className, onAdd }) => {
 
-    const getProductClassName = (productTitle) => {
-        let productClass = '';
-        switch (productTitle.toLowerCase()) {
-            case 'nitro accessories':
-                productClass = 'nitro-accessories';
-                break;
-            case 'clash':
-                productClass = 'clash';
-                break;
-            case 'royale':
-                productClass = 'royale';
-                break;
-            case 'clash royale gems':
-                productClass = 'clash-royale-gems';
-                break;
-            default:
-                productClass = '';
-                break;
-        }
-        return productClass;
-    }
+    // const getProductClassName = (productTitle) => {
+    //     let productClass = '';
+    //     switch (productTitle.toLowerCase()) {
+    //         case 'nitro accessories':
+    //             productClass = 'nitro-accessories';
+    //             break;
+    //         case 'clash':
+    //             productClass = 'clash';
+    //             break;
+    //         case 'royale':
+    //             productClass = 'royale';
+    //             break;
+    //         case 'clash royale gems':
+    //             productClass = 'clash-royale-gems';
+    //             break;
+    //         default:
+    //             productClass = '';
+    //             break;
+    //     }
+    //     return productClass;
+    // }
 
     const onAddHandler = () => {
         onAdd(product);
     }
 
-    const productClass = getProductClassName(product.title);
+    //const productClass = getProductClassName(product.title);
 
     return (
         <div className={`product ${productClass} ${className}`}>
@@ -71,7 +71,7 @@ const ProductItem = ({ product, className, onAdd }) => {
             <div className="title"> <b>{product.title}</b> </div>
             <div className="description">{product.description}</div>
             <div className="price">
-                <span><b>{product.price} руб</b></span>
+                <span><b><i>{product.price} руб</i></b></span>
             </div>
             <Button className="add-btn" onClick={onAddHandler}>
                 Добавить в корзину

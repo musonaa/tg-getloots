@@ -29,6 +29,21 @@
     height: auto; 
     object-fit: cover;
 }
+
 .img{
     margin-bottom: 36px;
 }
+
+.product.nitro-accessories .img img,
+.product.clash .img img,
+.product.royale .img img{
+    height: 30px; 
+    object-fit: contain;
+}
+
+.reduced-height {
+    height: 30px;
+  }
+  
+  /* Other styles from your existing productItem.css */
+  

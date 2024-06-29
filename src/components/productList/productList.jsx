@@ -243,14 +243,22 @@ const ProductList = () => {
                     <div className="filter">
                         <label htmlFor="category">Продукт: </label>
                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                            <option value="All">All</option>
+                        <option value="All">All</option>
                             <option value="lol">League of Legends</option>
                             <option value="genshin">Genshin Impact</option>
                             <option value="wuwa">Wuthering Waves</option>
                             <option value="brawl">Brawl Stars</option>
-                            {/* Add other options */}
+                            <option value="royale">Clash Royale</option>
+                            <option value="clash">Clash of Clans</option>
+                            <option value="honkai">Honkai Star Rail</option>
+                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                            <option value="accessories">Discord Accessories (без Nitro)</option>
+                            <option value="steam">Steam Games</option>
                         </select>
                     </div>
+                    <button onClick={toggleCart} className="cart-btn">
+                        Показать корзину
+                    </button>
                     <div className="product-list">
                         {filteredProducts.map(product => (
                             <ProductItem
@@ -263,9 +271,9 @@ const ProductList = () => {
                 </div>
             )}
             {showScrollToTop && (
-                <button className="scroll-to-top" onClick={scrollToTop}>
+                <Button className="scroll-to-top" onClick={scrollToTop}>
                     ↑
-                </button>
+                </Button>
             )}
         </div>
     );

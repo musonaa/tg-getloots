@@ -37,6 +37,8 @@ label{
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
+    align-content: center;
+    align-items: center;
 }
 
 .scroll-to-top {
@@ -67,7 +69,8 @@ label{
 .product-item {
     flex: 1 1 calc(25% - 20px); /* Adjust the percentage and margin for different grid sizes */
     box-sizing: border-box;
-    margin: 10px;
+    margin: 8px;
+    margin-bottom: 8px;
 }
 
 .product-item img {

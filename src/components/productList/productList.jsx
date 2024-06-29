@@ -239,7 +239,7 @@ const ProductList = () => {
                     onClose={handleCloseCart}
                 />
             ) : (
-                <div>
+                <div className="container">
                     <div className="filter">
                         <label htmlFor="category">Продукт: </label>
                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
@@ -256,9 +256,12 @@ const ProductList = () => {
                             <option value="steam">Steam Games</option>
                         </select>
                     </div>
-                    <button onClick={toggleCart} className="cart-btn">
-                        Показать корзину
-                    </button>
+                    <div className="cart-btn-container">
+                        <button onClick={toggleCart} className="cart-btn">
+                            Показать корзину
+                        </button>
+                    </div>
+                    
                     <div className="product-list">
                         {filteredProducts.map(product => (
                             <ProductItem

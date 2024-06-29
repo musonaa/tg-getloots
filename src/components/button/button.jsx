@@ -1,13 +1,14 @@
-import React from 'react';
-import './button.css'; 
+// import React from 'react';
+// import './button.css'; 
 
-const Button = (props) => {
-    return (
-        <button{...props} className={'button' + props.className}/>
-    )
-}
+// const Button = (props) => {
+//     return (
+//         <button{...props} className={'button' + props.className}/>
+//     )
+// }
 
-export default Button;
+// export default Button;
+
 // import React from 'react';
 // import './button.css'; 
 
@@ -19,3 +20,18 @@ export default Button;
 // }
 
 // export default Button;
+
+import React from 'react';
+import './button.css'; 
+
+const Button = (props) => {
+    const { className, ...restProps } = props;
+    return (
+        <button {...restProps} className={`button ${className}`}>
+            {props.children}
+        </button>
+    );
+}
+
+export default Button;
+

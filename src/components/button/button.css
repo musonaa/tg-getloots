@@ -9,4 +9,5 @@
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+    justify-content: center;
 }

@@ -11,7 +11,7 @@ const Header = () => {
             {/* <Button onClick={onClose}>Закрыть</Button> */}
             <span className={'username'}>
                 <b>{user?.username}</b>, добро пожаловать в GetLoots! <br />
-                Желаем вам приятных покупок❤️
+                Желаем приятных покупок❤️
             </span>
         </div>   
     )

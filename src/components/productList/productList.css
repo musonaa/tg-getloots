@@ -130,7 +130,7 @@ body {
     justify-content: center;
 }
 
-/* .product-item {
+.product-item {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -154,7 +154,7 @@ body {
     font-size: 1em;
     margin: 10px 0;
     color: #666;
-} */
+}
 
 .product-item button {
     padding: 10px 15px;

@@ -91,7 +91,7 @@ label{
 
 
 body {
-    /* font-family: Arial, sans-serif; */
+    font-family: Arial, sans-serif;
     background-color: var(--tg-theme-background-color);
     margin: 0;
     padding: 0;
@@ -125,10 +125,11 @@ body {
 }
 
 .product-item {
+    background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 15px;
-    width: calc(33.333% - 20px);
+    width: calc(50% - 20px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -194,10 +195,4 @@ body {
     font-size: 24px;
     cursor: pointer;
     z-index: 1000;
-    transition: opacity 0.3s ease-in-out;
-}
-
-
-.scroll-to-top.show {
-    display: block;
 }

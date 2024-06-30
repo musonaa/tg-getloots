@@ -1,4 +1,4 @@
-.list{
+/* .list{
     display: flex;
     flex-wrap:wrap;
     justify-content: center;
@@ -87,10 +87,10 @@ label{
     align-items: center;
     text-align: center;
     justify-content: center;
-}
+} */
 
 
-/* body {
+body {
     font-family: Arial, sans-serif;
     background-color: var(--tg-theme-background-color);
     margin: 0;
@@ -98,6 +98,7 @@ label{
 }
 
 .container {
+    max-width: 1200px; /* Ensure container has a max-width */
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -118,9 +119,9 @@ label{
 
 .product-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 20px; /* Space between items */
+    justify-content: center; /* Center items horizontally */
 }
 
 .product-item {
@@ -128,12 +129,12 @@ label{
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 15px;
-    width: calc(50% - 20px);
+    width: calc(50% - 20px); /* Two items per row */
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center; 
+    flex-direction: column; /* Ensure column layout for product details */
+    align-items: center; /* Center items horizontally within product item */
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -159,20 +160,20 @@ label{
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background:  var(--tg-theme-button-color);
+    background: var(--tg-theme-button-color);
     color: #fff;
     cursor: pointer;
 }
 
 .cart-btn-container {
-    text-align: center;
+    text-align: center; /* Ensure center alignment */
     margin-bottom: 20px;
 }
 
 .cart-btn {
     display: inline-block;
     padding: 10px 20px;
-    background:  var(--tg-theme-button-color);
+    background: var(--tg-theme-button-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -180,7 +181,6 @@ label{
     font-size: 1em;
     text-align: center;
 }
-
 
 .scroll-to-top {
     position: fixed;

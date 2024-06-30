@@ -9,10 +9,8 @@
 
 .img{
     width: 100%;
-    /* background: lightgreen; */
     height: 100px;
     margin: 0 auto;
-    /* background: var(--tg-theme-button-color); */
 }
 
 .description{
@@ -35,9 +33,6 @@
     margin-bottom: 36px;
 }
 
-.reduced-height {
-    height: 30px;
-  }
   
   .title{
     font-size: 14px;

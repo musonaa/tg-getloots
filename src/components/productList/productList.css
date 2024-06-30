@@ -97,7 +97,7 @@ label{
 
 
 
-/* body {
+body {
     font-family: Arial, sans-serif;
     background-color: var(--tg-theme-background-color);
     margin: 0;
@@ -130,7 +130,7 @@ label{
     justify-content: center;
 }
 
-.product-item {
+/* .product-item {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -144,12 +144,6 @@ label{
     margin-bottom: 20px;
 }
 
-.product-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
 
 .product-item h2 {
     font-size: 1.2em;
@@ -160,7 +154,7 @@ label{
     font-size: 1em;
     margin: 10px 0;
     color: #666;
-}
+} */
 
 .product-item button {
     padding: 10px 15px;
@@ -201,7 +195,7 @@ label{
     font-size: 24px;
     cursor: pointer;
     z-index: 1000;
-} */
+}
 
 /* .scroll-to-top {
     position: fixed;
@@ -217,8 +211,3 @@ label{
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
 } for pc web*/
-.list{
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: center;
-}

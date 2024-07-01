@@ -3,9 +3,22 @@ import React, { useEffect, useState } from 'react';
 const OrdersComponent = () => {
     const [orders, setOrders] = useState([]);
 
+    // useEffect(() => {
+    //     const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    //     setOrders(storedOrders);
+    // }, []);
     useEffect(() => {
-        const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-        setOrders(storedOrders);
+        const fetchOrders = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/orders');
+                const data = await response.json();
+                setOrders(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+
+        fetchOrders();
     }, []);
 
     return (

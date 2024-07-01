@@ -308,18 +308,30 @@ const getTotalPrice = (items = []) => {
 
 // export default ProductList;
 
+
+
+
+
+const currencies = {
+    USD: { symbol: '$', rate: 1 },
+    EUR: { symbol: '€', rate: 0.85 },
+    GBP: { symbol: '£', rate: 0.75 },
+    RUB: { symbol: '₽', rate: 1 }, // Default to 1 Ruble = 1 unit (no conversion)
+};
+
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedCurrency, setSelectedCurrency] = useState('RUB'); // Default to Ruble (₽)
     const [isCartVisible, setCartVisible] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [showForm, setShowForm] = useState(false); // State to manage form visibility
+    const [showForm, setShowForm] = useState(false);
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
             product: addedItems,
-            totalPrice: getTotalPrice(addedItems),
+            totalPrice: getTotalPrice(addedItems, currencies[selectedCurrency].rate),
             queryId,
         };
         fetch("http://localhost:8000/web-data", {
@@ -329,7 +341,7 @@ const ProductList = () => {
             },
             body: JSON.stringify(data),
         });
-    }, [addedItems, queryId]);
+    }, [addedItems, queryId, selectedCurrency]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -345,6 +357,7 @@ const ProductList = () => {
 
         tg.onEvent('mainButtonClicked', handlePayClick);
 
+        // Cleanup function
         return () => {
             tg.offEvent('mainButtonClicked', handlePayClick);
         };
@@ -367,13 +380,30 @@ const ProductList = () => {
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`,
+                text: `Купить ${formatCurrency(getTotalPrice(newItems, currencies[selectedCurrency].rate), selectedCurrency)}`,
             });
         }
     };
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
+    };
+
+    const handleCurrencyChange = (event) => {
+        setSelectedCurrency(event.target.value);
+    };
+
+    const getTotalPrice = (items = [], currencyRate) => {
+        return items.reduce((acc, item) => {
+            return acc + item.price * currencyRate;
+        }, 0);
+    };
+
+    const formatCurrency = (amount, currency) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency,
+        }).format(amount);
     };
 
     const filteredProducts = selectedCategory === 'All'
@@ -384,10 +414,6 @@ const ProductList = () => {
         setCartVisible(!isCartVisible);
     };
 
-    const toggleForm = () => {
-        setShowForm(!showForm); // Function to toggle form visibility
-    };
-
     const handleRemove = (id) => {
         const newItems = addedItems.filter(item => item.id !== id);
         setAddedItems(newItems);
@@ -396,7 +422,7 @@ const ProductList = () => {
             tg.MainButton.hide();
         } else {
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`,
+                text: `Купить ${formatCurrency(getTotalPrice(newItems, currencies[selectedCurrency].rate), selectedCurrency)}`,
             });
         }
     };
@@ -428,18 +454,6 @@ const ProductList = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const handleMainButtonClick = () => {
-            setShowForm(true); // Set showForm to true when main button is clicked
-        };
-
-        tg.onEvent('mainButtonClicked', handleMainButtonClick);
-
-        return () => {
-            tg.offEvent('mainButtonClicked', handleMainButtonClick);
-        };
-    }, [tg]);
-
     return (
         <div>
             {isCartVisible ? (
@@ -462,34 +476,26 @@ const ProductList = () => {
                             <option value="royale">Clash Royale</option>
                             <option value="clash">Clash of Clans</option>
                             <option value="honkai">Honkai Star Rail</option>
-                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-                            <option value="accessories">Discord Accessories (без Nitro)</option>
-                            <option value="steam">Steam Games</option>
+                        </select>
+                        <label htmlFor="currency">Currency: </label>
+                        <select id="currency" value={selectedCurrency} onChange={handleCurrencyChange}>
+                            {Object.keys(currencies).map(currency => (
+                                <option key={currency} value={currency}>{currencies[currency].symbol}</option>
+                            ))}
                         </select>
                     </div>
-                    <div className="cart-btn-container">
-                        <button onClick={toggleCart} className="cart-btn">
-                            Показать корзину
-                        </button>
-                    </div>
-
-                    <div className="product-list">
+                    <div className="products">
                         {filteredProducts.map(product => (
-                            <ProductItem
-                                key={product.id}
-                                product={product}
-                                onAdd={onAdd}
-                            />
+                            <ProductItem key={product.id} product={product} onAdd={onAdd} />
                         ))}
                     </div>
+                    {showScrollToTop && (
+                        <button className="scrollToTop" onClick={scrollToTop}>Scroll to Top</button>
+                    )}
+                    <PayButton onClick={toggleCart} />
                 </div>
             )}
-            {showScrollToTop && (
-                <button className="scroll-to-top" onClick={scrollToTop}>
-                    ↑
-                </button>
-            )}
-            {showForm && <Form />} {/* Render Form component based on showForm state */}
+            {showForm && <Form onClose={() => setShowForm(false)} />}
         </div>
     );
 };

@@ -3,8 +3,7 @@ import './productList.css';
 import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 import Cart from '../cart/cart';
-import Form from '../form/form';
-
+// import Form from '../form/form';
 const products = [
 
     {id: '1', title: '470 RP', price: 200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
@@ -127,12 +126,14 @@ const getTotalPrice = (items = []) => {
     }, 0);
 }
 
+
+
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isCartVisible, setCartVisible] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [showForm, setShowForm] = useState(false);  // State to control form visibility
+    const [showForm, setShowForm] = useState(false);
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -174,7 +175,7 @@ const ProductList = () => {
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`, // Corrected template literal
+                text: `Купить ${getTotalPrice(newItems)}`,
             });
         }
     };
@@ -192,7 +193,7 @@ const ProductList = () => {
     };
 
     const handlePayClick = () => {
-        setShowForm(true);  // Show the form when pay button is clicked
+        setShowForm(true);
         tg.MainButton.hide();
     };
 
@@ -204,7 +205,7 @@ const ProductList = () => {
             tg.MainButton.hide();
         } else {
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`, // Corrected template literal
+                text: `Купить ${getTotalPrice(newItems)}`,
             });
         }
     };
@@ -244,19 +245,28 @@ const ProductList = () => {
             ) : (
                 <div className="container">
                     <div className="filter">
-                        <label htmlFor="category">Выберите категорию:</label>
-                        <select
-                            id="category"
-                            value={selectedCategory}
-                            onChange={handleCategoryChange}
-                        >
-                            <option value="All">Все товары</option>
+                        <label htmlFor="category">Продукт: </label>
+                        <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+                            <option value="All">All</option>
                             <option value="lol">League of Legends</option>
                             <option value="genshin">Genshin Impact</option>
-                            {/* Add other categories as needed */}
+                            <option value="wuwa">Wuthering Waves</option>
+                            <option value="brawl">Brawl Stars</option>
+                            <option value="royale">Clash Royale</option>
+                            <option value="clash">Clash of Clans</option>
+                            <option value="honkai">Honkai Star Rail</option>
+                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                            <option value="accessories">Discord Accessories (без Nitro)</option>
+                            <option value="steam">Steam Games</option>
                         </select>
                     </div>
-                    <div className="products">
+                    <div className="cart-btn-container">
+                        <button onClick={toggleCart} className="cart-btn">
+                            Показать корзину
+                        </button>
+                    </div>
+                    
+                    <div className="product-list">
                         {filteredProducts.map(product => (
                             <ProductItem
                                 key={product.id}
@@ -265,21 +275,21 @@ const ProductList = () => {
                             />
                         ))}
                     </div>
-                    {showForm && <Form />}  {/* Render the form when showForm is true */}
-                    <button
-                        className="scroll-to-top"
-                        onClick={scrollToTop}
-                        style={{ display: showScrollToTop ? 'block' : 'none' }}
-                    >
-                        Наверх
-                    </button>
                 </div>
+            )}
+            {showForm && <Form />}
+            {showScrollToTop && (
+                <button className="scroll-to-top" onClick={scrollToTop}>
+                    ↑
+                </button>
             )}
         </div>
     );
 };
 
 export default ProductList;
+
+
 
 
 

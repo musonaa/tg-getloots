@@ -129,11 +129,10 @@ const getTotalPrice = (items = []) => {
 }
 
 
-
 // const ProductList = () => {
 //     const [addedItems, setAddedItems] = useState([]);
 //     const [selectedCategory, setSelectedCategory] = useState('All');
-//     const [isCartVisible, setCartVisible] = useState(false);
+//     const [isCartVisible, setCartVisible] = useState(false); 
 //     const [showScrollToTop, setShowScrollToTop] = useState(false);
 //     const [showForm, setShowForm] = useState(false);
 //     const { tg, queryId } = useTelegram();
@@ -154,12 +153,27 @@ const getTotalPrice = (items = []) => {
 //     }, [addedItems, queryId]);
 
 //     useEffect(() => {
+//         tg.onEvent('mainButtonClicked', onSendData);
+//         return () => {
+//             tg.offEvent('mainButtonClicked', onSendData);
+//         };
+//     }, [onSendData, tg]);
+// //huinya
+    
+
+//     useEffect(() => {
+//         const handlePayClick = () => {
+//             setShowForm(true); // Set showForm to true when pay button is clicked
+//         };
+
 //         tg.onEvent('mainButtonClicked', handlePayClick);
+
+//         // Cleanup function
 //         return () => {
 //             tg.offEvent('mainButtonClicked', handlePayClick);
 //         };
-//     }, [onSendData, tg]);
-
+//     }, [tg]);
+// //conez
 //     const onAdd = (product) => {
 //         const alreadyAdded = addedItems.find(item => item.id === product.id);
 //         let newItems = [];
@@ -194,11 +208,9 @@ const getTotalPrice = (items = []) => {
 //         setCartVisible(!isCartVisible);
 //     };
 
-//     const handlePayClick = () => {
-//         setShowForm(true);
-//         tg.MainButton.hide();
-//     };
-
+//     // const toggleForm = () =>{
+//     //     setShowForm(!showForm);
+//     // }
 //     const handleRemove = (id) => {
 //         const newItems = addedItems.filter(item => item.id !== id);
 //         setAddedItems(newItems);
@@ -210,6 +222,10 @@ const getTotalPrice = (items = []) => {
 //                 text: `Купить ${getTotalPrice(newItems)}`,
 //             });
 //         }
+//     };
+
+//     const handlePay = () => {
+//         onSendData();
 //     };
 
 //     const handleCloseCart = () => {
@@ -241,7 +257,7 @@ const getTotalPrice = (items = []) => {
 //                 <Cart
 //                     items={addedItems}
 //                     onRemove={handleRemove}
-//                     onPay={handlePayClick}
+//                     onPay={handlePay}
 //                     onClose={handleCloseCart}
 //                 />
 //             ) : (
@@ -249,7 +265,7 @@ const getTotalPrice = (items = []) => {
 //                     <div className="filter">
 //                         <label htmlFor="category">Продукт: </label>
 //                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-//                             <option value="All">All</option>
+//                         <option value="All">All</option>
 //                             <option value="lol">League of Legends</option>
 //                             <option value="genshin">Genshin Impact</option>
 //                             <option value="wuwa">Wuthering Waves</option>
@@ -279,32 +295,25 @@ const getTotalPrice = (items = []) => {
 //                     </div>
 //                 </div>
 //             )}
-//             {/* {showForm && <Form />} */}
 //             {showScrollToTop && (
 //                 <button className="scroll-to-top" onClick={scrollToTop}>
 //                     ↑
 //                 </button>
 //             )}
+//             {showForm && <Form />}
+
 //         </div>
 //     );
 // };
 
 // export default ProductList;
 
-
-
-
-
-
-
-
-
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [isCartVisible, setCartVisible] = useState(false); 
+    const [isCartVisible, setCartVisible] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [showForm, setShowForm] = useState(false);
+    const [showForm, setShowForm] = useState(false); // State to manage form visibility
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -328,8 +337,6 @@ const ProductList = () => {
             tg.offEvent('mainButtonClicked', onSendData);
         };
     }, [onSendData, tg]);
-//huinya
-    
 
     useEffect(() => {
         const handlePayClick = () => {
@@ -338,12 +345,11 @@ const ProductList = () => {
 
         tg.onEvent('mainButtonClicked', handlePayClick);
 
-        // Cleanup function
         return () => {
             tg.offEvent('mainButtonClicked', handlePayClick);
         };
     }, [tg]);
-//conez
+
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
@@ -378,9 +384,10 @@ const ProductList = () => {
         setCartVisible(!isCartVisible);
     };
 
-    const toggleForm = () =>{
-        setShowForm(!showForm);
-    }
+    const toggleForm = () => {
+        setShowForm(!showForm); // Function to toggle form visibility
+    };
+
     const handleRemove = (id) => {
         const newItems = addedItems.filter(item => item.id !== id);
         setAddedItems(newItems);
@@ -421,6 +428,18 @@ const ProductList = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const handleMainButtonClick = () => {
+            setShowForm(true); // Set showForm to true when main button is clicked
+        };
+
+        tg.onEvent('mainButtonClicked', handleMainButtonClick);
+
+        return () => {
+            tg.offEvent('mainButtonClicked', handleMainButtonClick);
+        };
+    }, [tg]);
+
     return (
         <div>
             {isCartVisible ? (
@@ -435,7 +454,7 @@ const ProductList = () => {
                     <div className="filter">
                         <label htmlFor="category">Продукт: </label>
                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                        <option value="All">All</option>
+                            <option value="All">All</option>
                             <option value="lol">League of Legends</option>
                             <option value="genshin">Genshin Impact</option>
                             <option value="wuwa">Wuthering Waves</option>
@@ -453,7 +472,7 @@ const ProductList = () => {
                             Показать корзину
                         </button>
                     </div>
-                    
+
                     <div className="product-list">
                         {filteredProducts.map(product => (
                             <ProductItem
@@ -470,9 +489,7 @@ const ProductList = () => {
                     ↑
                 </button>
             )}
-            {/* {showForm && <Form />} */}
-            {toggleForm && <Form/>}
-
+            {showForm && <Form />} {/* Render Form component based on showForm state */}
         </div>
     );
 };

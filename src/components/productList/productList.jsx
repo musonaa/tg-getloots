@@ -129,201 +129,10 @@ const getTotalPrice = (items = []) => {
 }
 
 
-// const ProductList = () => {
-//     const [addedItems, setAddedItems] = useState([]);
-//     const [selectedCategory, setSelectedCategory] = useState('All');
-//     const [isCartVisible, setCartVisible] = useState(false); 
-//     const [showScrollToTop, setShowScrollToTop] = useState(false);
-//     const [showForm, setShowForm] = useState(false);
-//     const { tg, queryId } = useTelegram();
-
-//     const onSendData = useCallback(() => {
-//         const data = {
-//             product: addedItems,
-//             totalPrice: getTotalPrice(addedItems),
-//             queryId,
-//         };
-//         fetch("http://localhost:8000/web-data", {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         });
-//     }, [addedItems, queryId]);
-
-//     useEffect(() => {
-//         tg.onEvent('mainButtonClicked', onSendData);
-//         return () => {
-//             tg.offEvent('mainButtonClicked', onSendData);
-//         };
-//     }, [onSendData, tg]);
-// //huinya
-    
-
-//     useEffect(() => {
-//         const handlePayClick = () => {
-//             setShowForm(true); // Set showForm to true when pay button is clicked
-//         };
-
-//         tg.onEvent('mainButtonClicked', handlePayClick);
-
-//         // Cleanup function
-//         return () => {
-//             tg.offEvent('mainButtonClicked', handlePayClick);
-//         };
-//     }, [tg]);
-// //conez
-//     const onAdd = (product) => {
-//         const alreadyAdded = addedItems.find(item => item.id === product.id);
-//         let newItems = [];
-
-//         if (alreadyAdded) {
-//             newItems = addedItems.filter(item => item.id !== product.id);
-//         } else {
-//             newItems = [...addedItems, product];
-//         }
-
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.show();
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handleCategoryChange = (event) => {
-//         setSelectedCategory(event.target.value);
-//     };
-
-//     const filteredProducts = selectedCategory === 'All'
-//         ? products
-//         : products.filter(product => product.category === selectedCategory);
-
-//     const toggleCart = () => {
-//         setCartVisible(!isCartVisible);
-//     };
-
-//     // const toggleForm = () =>{
-//     //     setShowForm(!showForm);
-//     // }
-//     const handleRemove = (id) => {
-//         const newItems = addedItems.filter(item => item.id !== id);
-//         setAddedItems(newItems);
-
-//         if (newItems.length === 0) {
-//             tg.MainButton.hide();
-//         } else {
-//             tg.MainButton.setParams({
-//                 text: `Купить ${getTotalPrice(newItems)}`,
-//             });
-//         }
-//     };
-
-//     const handlePay = () => {
-//         onSendData();
-//     };
-
-//     const handleCloseCart = () => {
-//         setCartVisible(false);
-//     };
-
-//     const handleScroll = () => {
-//         if (window.pageYOffset > 300) {
-//             setShowScrollToTop(true);
-//         } else {
-//             setShowScrollToTop(false);
-//         }
-//     };
-
-//     const scrollToTop = () => {
-//         window.scrollTo({ top: 0, behavior: 'smooth' });
-//     };
-
-//     useEffect(() => {
-//         window.addEventListener('scroll', handleScroll);
-//         return () => {
-//             window.removeEventListener('scroll', handleScroll);
-//         };
-//     }, []);
-
-//     return (
-//         <div>
-//             {isCartVisible ? (
-//                 <Cart
-//                     items={addedItems}
-//                     onRemove={handleRemove}
-//                     onPay={handlePay}
-//                     onClose={handleCloseCart}
-//                 />
-//             ) : (
-//                 <div className="container">
-//                     <div className="filter">
-//                         <label htmlFor="category">Продукт: </label>
-//                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-//                         <option value="All">All</option>
-//                             <option value="lol">League of Legends</option>
-//                             <option value="genshin">Genshin Impact</option>
-//                             <option value="wuwa">Wuthering Waves</option>
-//                             <option value="brawl">Brawl Stars</option>
-//                             <option value="royale">Clash Royale</option>
-//                             <option value="clash">Clash of Clans</option>
-//                             <option value="honkai">Honkai Star Rail</option>
-//                             <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-//                             <option value="accessories">Discord Accessories (без Nitro)</option>
-//                             <option value="steam">Steam Games</option>
-//                         </select>
-//                     </div>
-//                     <div className="cart-btn-container">
-//                         <button onClick={toggleCart} className="cart-btn">
-//                             Показать корзину
-//                         </button>
-//                     </div>
-                    
-//                     <div className="product-list">
-//                         {filteredProducts.map(product => (
-//                             <ProductItem
-//                                 key={product.id}
-//                                 product={product}
-//                                 onAdd={onAdd}
-//                             />
-//                         ))}
-//                     </div>
-//                 </div>
-//             )}
-//             {showScrollToTop && (
-//                 <button className="scroll-to-top" onClick={scrollToTop}>
-//                     ↑
-//                 </button>
-//             )}
-//             {showForm && <Form />}
-
-//         </div>
-//     );
-// };
-
-// export default ProductList;
-
-
-
-
-
-const currencies = {
-    USD: { symbol: '$', rate: 1 },
-    EUR: { symbol: '€', rate: 0.85 },
-    GBP: { symbol: '£', rate: 0.75 },
-    RUB: { symbol: '₽', rate: 1 }, // Default to 1 Ruble = 1 unit (no conversion)
-};
-
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedCurrency, setSelectedCurrency] = useState('RUB'); // Default to Ruble (₽)
-    const [isCartVisible, setCartVisible] = useState(false);
+    const [isCartVisible, setCartVisible] = useState(false); 
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const { tg, queryId } = useTelegram();
@@ -331,7 +140,7 @@ const ProductList = () => {
     const onSendData = useCallback(() => {
         const data = {
             product: addedItems,
-            totalPrice: getTotalPrice(addedItems, currencies[selectedCurrency].rate),
+            totalPrice: getTotalPrice(addedItems),
             queryId,
         };
         fetch("http://localhost:8000/web-data", {
@@ -341,7 +150,7 @@ const ProductList = () => {
             },
             body: JSON.stringify(data),
         });
-    }, [addedItems, queryId, selectedCurrency]);
+    }, [addedItems, queryId]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -349,6 +158,8 @@ const ProductList = () => {
             tg.offEvent('mainButtonClicked', onSendData);
         };
     }, [onSendData, tg]);
+//huinya
+    
 
     useEffect(() => {
         const handlePayClick = () => {
@@ -362,7 +173,7 @@ const ProductList = () => {
             tg.offEvent('mainButtonClicked', handlePayClick);
         };
     }, [tg]);
-
+//conez
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
@@ -380,30 +191,13 @@ const ProductList = () => {
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Купить ${formatCurrency(getTotalPrice(newItems, currencies[selectedCurrency].rate), selectedCurrency)}`,
+                text: `Купить ${getTotalPrice(newItems)}`,
             });
         }
     };
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
-    };
-
-    const handleCurrencyChange = (event) => {
-        setSelectedCurrency(event.target.value);
-    };
-
-    const getTotalPrice = (items = [], currencyRate) => {
-        return items.reduce((acc, item) => {
-            return acc + item.price * currencyRate;
-        }, 0);
-    };
-
-    const formatCurrency = (amount, currency) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: currency,
-        }).format(amount);
     };
 
     const filteredProducts = selectedCategory === 'All'
@@ -414,6 +208,9 @@ const ProductList = () => {
         setCartVisible(!isCartVisible);
     };
 
+    // const toggleForm = () =>{
+    //     setShowForm(!showForm);
+    // }
     const handleRemove = (id) => {
         const newItems = addedItems.filter(item => item.id !== id);
         setAddedItems(newItems);
@@ -422,7 +219,7 @@ const ProductList = () => {
             tg.MainButton.hide();
         } else {
             tg.MainButton.setParams({
-                text: `Купить ${formatCurrency(getTotalPrice(newItems, currencies[selectedCurrency].rate), selectedCurrency)}`,
+                text: `Купить ${getTotalPrice(newItems)}`,
             });
         }
     };
@@ -468,7 +265,7 @@ const ProductList = () => {
                     <div className="filter">
                         <label htmlFor="category">Продукт: </label>
                         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                            <option value="All">All</option>
+                        <option value="All">All</option>
                             <option value="lol">League of Legends</option>
                             <option value="genshin">Genshin Impact</option>
                             <option value="wuwa">Wuthering Waves</option>
@@ -476,26 +273,35 @@ const ProductList = () => {
                             <option value="royale">Clash Royale</option>
                             <option value="clash">Clash of Clans</option>
                             <option value="honkai">Honkai Star Rail</option>
-                        </select>
-                        <label htmlFor="currency">Currency: </label>
-                        <select id="currency" value={selectedCurrency} onChange={handleCurrencyChange}>
-                            {Object.keys(currencies).map(currency => (
-                                <option key={currency} value={currency}>{currencies[currency].symbol}</option>
-                            ))}
+                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                            <option value="accessories">Discord Accessories (без Nitro)</option>
+                            <option value="steam">Steam Games</option>
                         </select>
                     </div>
-                    <div className="products">
+                    <div className="cart-btn-container">
+                        <button onClick={toggleCart} className="cart-btn">
+                            Показать корзину
+                        </button>
+                    </div>
+                    
+                    <div className="product-list">
                         {filteredProducts.map(product => (
-                            <ProductItem key={product.id} product={product} onAdd={onAdd} />
+                            <ProductItem
+                                key={product.id}
+                                product={product}
+                                onAdd={onAdd}
+                            />
                         ))}
                     </div>
-                    {showScrollToTop && (
-                        <button className="scrollToTop" onClick={scrollToTop}>Scroll to Top</button>
-                    )}
-                    <PayButton onClick={toggleCart} />
                 </div>
             )}
-            {showForm && <Form onClose={() => setShowForm(false)} />}
+            {showScrollToTop && (
+                <button className="scroll-to-top" onClick={scrollToTop}>
+                    ↑
+                </button>
+            )}
+            {showForm && <Form />}
+
         </div>
     );
 };

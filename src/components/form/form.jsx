@@ -116,6 +116,16 @@ const Form = () => {
         }
         tg.sendData(JSON.stringify(data));
 
+        try {
+            // Sending message to @musonaaa
+            tg.sendMessage('@musonaaa', `New order:\nEmail: ${email}\nSubject: ${subject}`);
+
+            // Example: Opening payment window (replace with your actual logic)
+            
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+
         // Save to localStorage (or send to backend)
         const orders = JSON.parse(localStorage.getItem('orders')) || [];
         orders.push(data);

@@ -163,7 +163,7 @@ const getTotalPrice = (items = []) => {
 
 //     useEffect(() => {
 //         const handlePayClick = () => {
-//             setShowForm(true); // Set showForm to true when pay button is clicked
+//             setShowForm(true); 
 //         };
 
 //         tg.onEvent('mainButtonClicked', handlePayClick);
@@ -316,177 +316,168 @@ const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isCartVisible, setCartVisible] = useState(false);
+    const [isFormVisible, setFormVisible] = useState(false); // State to show/hide the form
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [showForm, setShowForm] = useState(false);
     const { tg, queryId } = useTelegram();
-  
+
     const onSendData = useCallback(() => {
-      const data = {
-        product: addedItems,
-        totalPrice: getTotalPrice(addedItems),
-        queryId,
-      };
-      fetch('http://localhost:8000/web-data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+        const data = {
+            product: addedItems,
+            totalPrice: getTotalPrice(addedItems),
+            queryId,
+        };
+        fetch("http://localhost:8000/web-data", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
     }, [addedItems, queryId]);
-  
+
     useEffect(() => {
-      tg.onEvent('mainButtonClicked', onSendData);
-      return () => {
-        tg.offEvent('mainButtonClicked', onSendData);
-      };
-    }, [onSendData, tg]);
-  
-    useEffect(() => {
-      const handlePayClick = () => {
-        setShowForm(true); // Set showForm to true when pay button is clicked
-      };
-  
-      tg.onEvent('mainButtonClicked', handlePayClick);
-  
-      // Cleanup function
-      return () => {
-        tg.offEvent('mainButtonClicked', handlePayClick);
-      };
-    }, [tg]);
-  
+        const handlePayClick = () => {
+            setFormVisible(true); // Show form when pay button is clicked
+            onSendData();
+        };
+
+        tg.onEvent('mainButtonClicked', handlePayClick);
+        return () => {
+            tg.offEvent('mainButtonClicked', handlePayClick);
+        };
+    }, [tg, onSendData]);
+
     const onAdd = (product) => {
-      const alreadyAdded = addedItems.find((item) => item.id === product.id);
-      let newItems = [];
-  
-      if (alreadyAdded) {
-        newItems = addedItems.filter((item) => item.id !== product.id);
-      } else {
-        newItems = [...addedItems, product];
-      }
-  
-      setAddedItems(newItems);
-  
-      if (newItems.length === 0) {
-        tg.MainButton.hide();
-      } else {
-        tg.MainButton.show();
-        tg.MainButton.setParams({
-          text: `Купить ${getTotalPrice(newItems)}`,
-        });
-      }
-    };
-  
-    const handleCategoryChange = (event) => {
-      setSelectedCategory(event.target.value);
-    };
-  
-    const filteredProducts =
-      selectedCategory === 'All'
-        ? products
-        : products.filter((product) => product.category === selectedCategory);
-  
-    const toggleCart = () => {
-      setCartVisible(!isCartVisible);
-    };
-  
-    const handleRemove = (id) => {
-      const newItems = addedItems.filter((item) => item.id !== id);
-      setAddedItems(newItems);
-  
-      if (newItems.length === 0) {
-        tg.MainButton.hide();
-      } else {
-        tg.MainButton.setParams({
-          text: `Купить ${getTotalPrice(newItems)}`,
-        });
-      }
-    };
-  
-    const handlePay = () => {
-      onSendData();
-    };
-  
-    const handleCloseCart = () => {
-      setCartVisible(false);
-    };
-  
-    const handleScroll = () => {
-      if (window.pageYOffset > 300) {
-        setShowScrollToTop(true);
-      } else {
-        setShowScrollToTop(false);
-      }
-    };
-  
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-  
-    useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
-  
-    useEffect(() => {
-      if (showForm) {
-        const newWindow = window.open('', '_blank');
-        if (newWindow) {
-          newWindow.document.title = 'Form'; // Optional: Set title of the new window
-          newWindow.document.body.innerHTML = '<div id="form-container"></div>';
-          ReactDOM.render(<Form />, newWindow.document.getElementById('form-container'));
+        const alreadyAdded = addedItems.find(item => item.id === product.id);
+        let newItems = [];
+
+        if (alreadyAdded) {
+            newItems = addedItems.filter(item => item.id !== product.id);
         } else {
-          console.error('Failed to open new window');
+            newItems = [...addedItems, product];
         }
-      }
-    }, [showForm]);
-  
+
+        setAddedItems(newItems);
+
+        if (newItems.length === 0) {
+            tg.MainButton.hide();
+        } else {
+            tg.MainButton.show();
+            tg.MainButton.setParams({
+                text: `Купить ${getTotalPrice(newItems)}`,
+            });
+        }
+    };
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
+    const filteredProducts = selectedCategory === 'All'
+        ? products
+        : products.filter(product => product.category === selectedCategory);
+
+    const toggleCart = () => {
+        setCartVisible(!isCartVisible);
+        setFormVisible(false); // Ensure form is hidden when toggling cart
+    };
+
+    const handleRemove = (id) => {
+        const newItems = addedItems.filter(item => item.id !== id);
+        setAddedItems(newItems);
+
+        if (newItems.length === 0) {
+            tg.MainButton.hide();
+        } else {
+            tg.MainButton.setParams({
+                text: `Купить ${getTotalPrice(newItems)}`,
+            });
+        }
+    };
+
+    const handleCloseCart = () => {
+        setCartVisible(false);
+    };
+
+    const handleScroll = () => {
+        if (window.pageYOffset > 300) {
+            setShowScrollToTop(true);
+        } else {
+            setShowScrollToTop(false);
+        }
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const handleCloseForm = () => {
+        setFormVisible(false);
+    };
+
     return (
-      <div>
-        {isCartVisible ? (
-          <Cart items={addedItems} onRemove={handleRemove} onPay={handlePay} onClose={handleCloseCart} />
-        ) : (
-          <div className="container">
-            <div className="filter">
-              <label htmlFor="category">Продукт: </label>
-              <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                <option value="All">All</option>
-                <option value="lol">League of Legends</option>
-                <option value="genshin">Genshin Impact</option>
-                <option value="wuwa">Wuthering Waves</option>
-                <option value="brawl">Brawl Stars</option>
-                <option value="royale">Clash Royale</option>
-                <option value="clash">Clash of Clans</option>
-                <option value="honkai">Honkai Star Rail</option>
-                <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-                <option value="accessories">Discord Accessories (без Nitro)</option>
-                <option value="steam">Steam Games</option>
-              </select>
-            </div>
-            <div className="cart-btn-container">
-              <button onClick={toggleCart} className="cart-btn">
-                Показать корзину
-              </button>
-            </div>
-  
-            <div className="product-list">
-              {filteredProducts.map((product) => (
-                <ProductItem key={product.id} product={product} onAdd={onAdd} />
-              ))}
-            </div>
-          </div>
-        )}
-        {showScrollToTop && (
-          <button className="scroll-to-top" onClick={scrollToTop}>
-            ↑
-          </button>
-        )}
-        {showForm && <Form />}
-      </div>
-      
+        <div>
+            {isCartVisible ? (
+                <Cart
+                    items={addedItems}
+                    onRemove={handleRemove}
+                    onPay={onSendData}
+                    onClose={handleCloseCart}
+                />
+            ) : isFormVisible ? (
+                <div className="form-container">
+                    <Form />
+                    <button onClick={handleCloseForm} className="close-form-btn">Закрыть форму</button>
+                </div>
+            ) : (
+                <div className="container">
+                    <div className="filter">
+                        <label htmlFor="category">Продукт: </label>
+                        <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+                            <option value="All">All</option>
+                            <option value="lol">League of Legends</option>
+                            <option value="genshin">Genshin Impact</option>
+                            <option value="wuwa">Wuthering Waves</option>
+                            <option value="brawl">Brawl Stars</option>
+                            <option value="royale">Clash Royale</option>
+                            <option value="clash">Clash of Clans</option>
+                            <option value="honkai">Honkai Star Rail</option>
+                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                            <option value="accessories">Discord Accessories (без Nitro)</option>
+                            <option value="steam">Steam Games</option>
+                        </select>
+                    </div>
+                    <div className="cart-btn-container">
+                        <button onClick={toggleCart} className="cart-btn">
+                            Показать корзину
+                        </button>
+                    </div>
+                    
+                    <div className="product-list">
+                        {filteredProducts.map(product => (
+                            <ProductItem
+                                key={product.id}
+                                product={product}
+                                onAdd={onAdd}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
+            {showScrollToTop && (
+                <button className="scroll-to-top" onClick={scrollToTop}>
+                    ↑
+                </button>
+            )}
+        </div>
     );
-  };
-  
-  export default ProductList;
+};
+
+export default ProductList;

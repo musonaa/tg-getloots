@@ -304,6 +304,7 @@ const ProductList = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isCartVisible, setCartVisible] = useState(false); 
     const [showScrollToTop, setShowScrollToTop] = useState(false);
+    const [showForm, setShowForm] = useState(false);
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -328,7 +329,7 @@ const ProductList = () => {
         };
     }, [onSendData, tg]);
 //huinya
-    const [showForm, setShowForm] = useState(false);
+    
 
     useEffect(() => {
         const handlePayClick = () => {
@@ -377,6 +378,9 @@ const ProductList = () => {
         setCartVisible(!isCartVisible);
     };
 
+    const toggleForm = () =>{
+        setShowForm(!showForm);
+    }
     const handleRemove = (id) => {
         const newItems = addedItems.filter(item => item.id !== id);
         setAddedItems(newItems);
@@ -466,7 +470,8 @@ const ProductList = () => {
                     ↑
                 </button>
             )}
-            {showForm && <Form />}
+            {/* {showForm && <Form />} */}
+            {toggleForm && <Form/>}
 
         </div>
     );

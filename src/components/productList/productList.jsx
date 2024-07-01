@@ -4,7 +4,8 @@ import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 import Cart from '../cart/cart';
 import PayButton from '../pay-btn/pay-btn';
-
+import Form
+ from '../form/form';
 const products = [
 
     {id: '1', title: '470 RP', price: 200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},

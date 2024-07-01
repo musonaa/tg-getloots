@@ -320,12 +320,12 @@ const ProductList = () => {
         });
     }, [addedItems, queryId]);
 
-    useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
-        };
-    }, [onSendData, tg]);
+    // useEffect(() => {
+    //     tg.onEvent('mainButtonClicked', onSendData);
+    //     return () => {
+    //         tg.offEvent('mainButtonClicked', onSendData);
+    //     };
+    // }, [onSendData, tg]);
 //huinya
     const [showForm, setShowForm] = useState(false);
 
@@ -387,9 +387,9 @@ const ProductList = () => {
         }
     };
 
-    const handlePay = () => {
-        onSendData();
-    };
+    // const handlePay = () => {
+    //     onSendData();
+    // };
 
     const handleCloseCart = () => {
         setCartVisible(false);
@@ -463,7 +463,6 @@ const ProductList = () => {
                     ↑
                 </button>
             )}
-            <PayButton />
         </div>
     );
 };

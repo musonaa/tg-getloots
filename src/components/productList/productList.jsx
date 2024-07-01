@@ -329,16 +329,18 @@ const ProductList = () => {
 //huinya
     const [showForm, setShowForm] = useState(false);
 
-    const handlePayClick = () => {
-        setShowForm(true);
-    }
     useEffect(() => {
+        const handlePayClick = () => {
+            setShowForm(true); // Set showForm to true when pay button is clicked
+        };
+
         tg.onEvent('mainButtonClicked', handlePayClick);
+
+        // Cleanup function
         return () => {
             tg.offEvent('mainButtonClicked', handlePayClick);
-            {showForm && <Form />}
         };
-    }, [handlePayClick, tg]);
+    }, [tg]);
 //conez
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
@@ -463,6 +465,7 @@ const ProductList = () => {
                     ↑
                 </button>
             )}
+            {showForm && <Form />}
 
         </div>
     );

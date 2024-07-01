@@ -189,6 +189,12 @@ const ProductList = () => {
         setCartVisible(!isCartVisible);
     };
 
+    const [showForm, setShowForm] = useState(false);
+
+    const handlePayClick = () => {
+        setShowForm(true);
+    }
+    
     const handleRemove = (id) => {
         const newItems = addedItems.filter(item => item.id !== id);
         setAddedItems(newItems);
@@ -199,6 +205,7 @@ const ProductList = () => {
             tg.MainButton.setParams({
                 text: `Купить ${getTotalPrice(newItems)}`,
             });
+            tg.onEvent('mainButtonClicked', handlePayClick);
         }
     };
 

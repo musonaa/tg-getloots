@@ -120,7 +120,7 @@ const Form = () => {
 
     const onSendData = useCallback(() => {
         const data = { email, password, subject };
-        fetch('http://95.163.234.85:8000/web-data', {
+        fetch('http://95.163.234.85:25293/web-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ const Form = () => {
             console.error('Error:', error);
           });
       }, [email, password, subject]);
-      
+
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         return () => {

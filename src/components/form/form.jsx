@@ -107,17 +107,34 @@ const Form = () => {
     const [subject, setSubject] = useState('');
     const { tg } = useTelegram();
 
+    // const onSendData = useCallback(() => {
+    //     const data = { email, password, subject };
+    //     fetch('http://95.163.234.85:8000/web-data', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data),
+    //     });
+    // }, [email, password, subject]);
+
     const onSendData = useCallback(() => {
         const data = { email, password, subject };
         fetch('http://95.163.234.85:8000/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-    }, [email, password, subject]);
-
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }).then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }, [email, password, subject]);
+      
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         return () => {

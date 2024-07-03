@@ -123,7 +123,8 @@ const Form = () => {
     const onSendData = useCallback(() => {
         const data = { email, password, subject };
         console.log('Sending data:', data);
-        fetch('192.168.1.12:3306/web-data', {
+        // fetch('192.168.1.12:3306/web-data', {
+            fetch('http://localhost:3000/web-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

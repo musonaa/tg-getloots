@@ -100,11 +100,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './form.css';
 import { useTelegram } from '../../hooks/useTelegram';
+import Payment from '../pay/pay-form';
 
 const Form = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [subject, setSubject] = useState('');
+    const [showPayment, setShowPayment] = useState(false);
     const { tg } = useTelegram();
 
     // const onSendData = useCallback(() => {
@@ -121,7 +123,7 @@ const Form = () => {
     const onSendData = useCallback(() => {
         const data = { email, password, subject };
         console.log('Sending data:', data);
-        fetch('http://95.163.234.85:25293', {
+        fetch('192.168.1.12:3306/web-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -130,6 +132,7 @@ const Form = () => {
         }).then(response => response.json())
           .then(data => {
             console.log('Success:', data);
+            setShowPayment(true);
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -168,6 +171,10 @@ const Form = () => {
     const onChangeSubject = (e) => {
         setSubject(e.target.value);
     };
+
+    if (showPayment) {
+        return <Payment email={email} subject={subject} />;
+    }
 
     return (
         <div className='form'>

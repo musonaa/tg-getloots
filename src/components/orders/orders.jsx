@@ -53,7 +53,7 @@ const OrdersComponent = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch('http://95.163.234.85:3301/orders');
+                const response = await fetch('http://192.168.1.71:3000/orders');
                 const data = await response.json();
                 setOrders(data);
             } catch (error) {

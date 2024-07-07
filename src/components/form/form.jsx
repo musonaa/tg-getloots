@@ -124,7 +124,7 @@ const Form = () => {
         const data = { email, password, subject };
         console.log('Sending data:', data);
         // fetch('192.168.1.12:3306/web-data', {
-            fetch('http://95.163.234.85:3301/web-data', {
+            fetch('http://192.168.1.71:3000/web-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -130,14 +130,19 @@ const Form = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        }).then(response => response.json())
-          .then(data => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send data');
+            }
+            return response.json();
+        })
+        .then(data => {
             console.log('Success:', data);
-            setShowPayment(true);
-          })
-          .catch((error) => {
+        })
+        .catch(error => {
             console.error('Error:', error);
-          });
+        });
       }, [email, password, subject]);
 
     useEffect(() => {

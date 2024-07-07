@@ -143,7 +143,7 @@ const ProductList = () => {
             queryId,
         };
         // fetch("http://localhost:8000/web-data", {
-            fetch("192.168.1.12:3306/web-data", {
+            fetch("http://95.163.234.85:3301/web-data", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -109,22 +109,11 @@ const Form = () => {
     const [showPayment, setShowPayment] = useState(false);
     const { tg } = useTelegram();
 
-    // const onSendData = useCallback(() => {
-    //     const data = { email, password, subject };
-    //     fetch('http://95.163.234.85:8000/web-data', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(data),
-    //     });
-    // }, [email, password, subject]);
-
     const onSendData = useCallback(() => {
         const data = { email, password, subject };
         console.log('Sending data:', data);
         // fetch('192.168.1.12:3306/web-data', {
-            fetch('http://192.168.1.71:3000/web-data', {
+            fetch('http://localhost/web-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

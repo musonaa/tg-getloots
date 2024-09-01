@@ -211,3 +211,14 @@ body {
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
 } for pc web*/
+.form .close-form-btn {
+    background-color: var(--tg-theme-button-color); /* Red background */
+    color: white; /* White text */
+    padding: 8px 10px; /* Padding inside the button */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 100%; /* Full width */
+    margin-top: 10px; /* Space above the button */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}

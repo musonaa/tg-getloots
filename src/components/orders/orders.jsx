@@ -53,7 +53,7 @@ const OrdersComponent = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:3306/orders');
+                const response = await fetch('http://127.0.0.1:3001/orders');
                 const data = await response.json();
                 setOrders(data);
             } catch (error) {

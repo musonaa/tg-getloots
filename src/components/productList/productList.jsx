@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';  // for navigation
 
 
 import Form from '../form/form';
+import Congratulations from '../congratulations/congrats';
+
 const products = [
 
     {id: '1', title: '470 RP', price: 200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
@@ -136,6 +138,7 @@ const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isCartVisible, setCartVisible] = useState(false);
+    const [isCongratsVisible, setCongratsVisible] = useState(false); // State to show/hide the form
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const history = useHistory();
     const { tg, queryId } = useTelegram();
@@ -146,27 +149,20 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         };
-
-        fetch("http://127.0.0.1:3001/save-cart", {
+            fetch("http://127.0.0.1:3001/web-data", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Cart data saved:', data);
-            history.push('/congratulations');  // Redirect to the Congratulations page
-        })
-        .catch(error => {
-            console.error('Error saving cart data:', error);
+            
         });
-    }, [addedItems, queryId, history]);
+    }, [addedItems, queryId]);
 
     useEffect(() => {
         const handlePayClick = () => {
-            onSendData(); // Directly call onSendData and redirect to the Congratulations page
+            setCongratsVisible(true); // Show form when pay button is clicked
+            onSendData();
         };
 
         tg.onEvent('mainButtonClicked', handlePayClick);
@@ -207,6 +203,7 @@ const ProductList = () => {
 
     const toggleCart = () => {
         setCartVisible(!isCartVisible);
+        setCongratsVisible(false); // Ensure form is hidden when toggling cart
     };
 
     const handleRemove = (id) => {
@@ -245,6 +242,10 @@ const ProductList = () => {
         };
     }, []);
 
+    const handleCloseCongrats = () => {
+        setCongratsVisible(false);
+    };
+
     return (
         <div>
             {isCartVisible ? (
@@ -254,6 +255,11 @@ const ProductList = () => {
                     onPay={onSendData}
                     onClose={handleCloseCart}
                 />
+            ) : isCongratsVisible ? (
+                <div className="form-container">
+                    <Congratulations />
+                    {/* <button onClick={handleCloseCongrats} className="close-form-btn">Закрыть форму</button> */}
+                </div>
             ) : (
                 <div className="container">
                     <div className="filter">

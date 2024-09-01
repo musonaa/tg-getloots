@@ -4,8 +4,10 @@ import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 import Cart from '../cart/cart';
 import PayButton from '../pay-btn/pay-btn';
-import Form
- from '../form/form';
+import { useHistory } from 'react-router-dom';  // for navigation
+
+
+import Form from '../form/form';
 const products = [
 
     {id: '1', title: '470 RP', price: 200, description: "Товар на скидке", img: "/images/rp.png", category: 'lol'},
@@ -134,6 +136,7 @@ const ProductList = () => {
     const [isCartVisible, setCartVisible] = useState(false);
     const [isFormVisible, setFormVisible] = useState(false); // State to show/hide the form
     const [showScrollToTop, setShowScrollToTop] = useState(false);
+    const history = useHistory();
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -142,14 +145,32 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         };
-            fetch("http://127.0.0.1:3001/web-data", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-    }, [addedItems, queryId]);
+    //         fetch("http://127.0.0.1:3001/web-data", {
+    //         method: 'POST',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(data),
+            
+    //     });
+    // }, [addedItems, queryId]);
+
+                fetch("http://127.0.0.1:3001/save-cart", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+                })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Cart data saved:', data);
+        history.push('/congratulations');  // Redirect to the Congratulations page
+    })
+    .catch(error => {
+        console.error('Error saving cart data:', error);
+    });
+}, [addedItems, queryId, history]);
 
     useEffect(() => {
         const handlePayClick = () => {

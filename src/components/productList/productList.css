@@ -211,7 +211,7 @@ body {
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
 } for pc web*/
-.form .close-form-btn {
+.close-form-btn {
     background-color: var(--tg-theme-button-color); /* Red background */
     color: white; /* White text */
     padding: 8px 10px; /* Padding inside the button */

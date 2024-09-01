@@ -198,6 +198,13 @@ const Form = () => {
                 <option value='League of Legends'>League of Legends</option>
                 <option value='Genshin Impact'>Genshin Impact</option>
                 <option value='Wuthering Waves'>Wuthering Waves</option>
+                <option value='Wuthering Waves'>Brawl Stars</option>
+                <option value='Wuthering Waves'>Clash Royale</option>
+                <option value='Wuthering Waves'>Clash of Clans</option>
+                <option value='Wuthering Waves'>Honkai Star Rail</option>
+                <option value='Wuthering Waves'>Discord Accessories</option>
+                <option value='Wuthering Waves'>Steam Games</option>
+
             </select>
         </div>
     );

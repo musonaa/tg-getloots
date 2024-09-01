@@ -150,7 +150,7 @@ const ProductList = () => {
             queryId,
         };
 
-        fetch("http://127.0.0.1:3001/save-cart", {
+        fetch("http://127.0.0.1:3001/web-data", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

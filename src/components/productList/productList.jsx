@@ -138,7 +138,7 @@ const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isCartVisible, setCartVisible] = useState(false);
-    const [isCongratsVisible, setCongratsVisible] = useState(false); // State to show/hide the form
+    const [isCongratsVisible, setCongratsVisible] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const history = useHistory();
     const { tg, queryId } = useTelegram();
@@ -149,20 +149,29 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         };
-            fetch("http://127.0.0.1:3001/save-cart", {
+
+        fetch("http://127.0.0.1:3001/save-cart", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-            
+        })
+        .then(response => {
+            if (response.ok) {
+                setCongratsVisible(true); // Show congrats page upon successful save
+            } else {
+                throw new Error('Failed to save cart data');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
     }, [addedItems, queryId]);
 
     useEffect(() => {
         const handlePayClick = () => {
-            setCongratsVisible(true); // Show form when pay button is clicked
-            onSendData();
+            onSendData(); // Trigger data sending and then show the congrats page
         };
 
         tg.onEvent('mainButtonClicked', handlePayClick);
@@ -203,7 +212,7 @@ const ProductList = () => {
 
     const toggleCart = () => {
         setCartVisible(!isCartVisible);
-        setCongratsVisible(false); // Ensure form is hidden when toggling cart
+        setCongratsVisible(false);
     };
 
     const handleRemove = (id) => {
@@ -242,10 +251,6 @@ const ProductList = () => {
         };
     }, []);
 
-    const handleCloseCongrats = () => {
-        setCongratsVisible(false);
-    };
-
     return (
         <div>
             {isCartVisible ? (
@@ -256,10 +261,7 @@ const ProductList = () => {
                     onClose={handleCloseCart}
                 />
             ) : isCongratsVisible ? (
-                <div className="form-container">
-                    <Congratulations />
-                    {/* <button onClick={handleCloseCongrats} className="close-form-btn">Закрыть форму</button> */}
-                </div>
+                <Congratulations />
             ) : (
                 <div className="container">
                     <div className="filter">

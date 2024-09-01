@@ -3,11 +3,11 @@ import './productList.css';
 import ProductItem from "../productItem/productItem";
 import { useTelegram } from '../../hooks/useTelegram';
 import Cart from '../cart/cart';
-import PayButton from '../pay-btn/pay-btn';
 import { useHistory } from 'react-router-dom';  // for navigation
 
-
+import PayButton from '../pay-btn/pay-btn';
 import Form from '../form/form';
+
 import Congratulations from '../congratulations/congrats';
 
 const products = [
@@ -149,7 +149,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         };
-            fetch("http://127.0.0.1:3001/web-data", {
+            fetch("http://127.0.0.1:3001/save-cart", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

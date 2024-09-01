@@ -170,7 +170,7 @@ const ProductList = () => {
     .then(response => response.json())
     .then(data => {
         console.log('Cart data saved:', data);
-        navigate.push('/congratulations');  // Redirect to the Congratulations page
+        navigate('/congratulations');  // Redirect to the Congratulations page
     })
     .catch(error => {
         console.error('Error saving cart data:', error);

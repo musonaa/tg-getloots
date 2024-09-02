@@ -1,6 +1,6 @@
 import React from 'react';
 import './congrats.css';
-import tuGif from '/images/kawaii-cute.gif';
+// import tuGif from '/images/kawaii-cute.gif';
 
 const Congratulations = () => {
     return (

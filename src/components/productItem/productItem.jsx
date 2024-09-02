@@ -44,7 +44,7 @@ const ProductItem = ({ product, className, onAdd }) => {
             <div className="img"> 
                 <img src={product.img} alt={product.title} />
             </div>
-            <div className="title"> <b>{product.title}</b> </div>
+            <div className="title"> <p>{product.title}</p> </div>
             <div className="description">{product.description}</div>
             <div className="price">
                 <span><b><i>{product.price} руб</i></b></span>

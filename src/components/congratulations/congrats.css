@@ -6,6 +6,8 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin: 100px auto;
     max-width: 500px; */
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .congratulations-container h1 {
@@ -15,6 +17,7 @@
 }
 
 .congratulations-container p {
-    font-size: 12px;
+    font-size: 20px;
     color: #333;
 }
+

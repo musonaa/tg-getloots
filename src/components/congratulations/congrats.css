@@ -19,13 +19,13 @@ body {
     /* color: #28a745; */
     font-size: 24px;
     margin-bottom: 20px;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .congratulations-container p {
     font-size: 20px;
     color: #333;
-    font-weight: 400;
+    font-weight: 200;
 }
 
 .tu-gif {

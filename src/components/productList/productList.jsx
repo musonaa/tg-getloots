@@ -283,7 +283,7 @@ const ProductList = () => {
                 <div className="container">
                     <div className='toph'>
                         <div className="filter">
-                            <label htmlFor="category">Продукт: </label>
+                            <label htmlFor="category">Фильтр: </label>
                             <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
                                 <option value="All">All</option>
                                 <option value="lol">League of Legends</option>

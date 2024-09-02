@@ -280,26 +280,28 @@ const ProductList = () => {
             //     </div>
             ) : (
                 <div className="container">
-                    <div className="filter">
-                        <label htmlFor="category">Продукт: </label>
-                        <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                            <option value="All">All</option>
-                            <option value="lol">League of Legends</option>
-                            <option value="genshin">Genshin Impact</option>
-                            <option value="wuwa">Wuthering Waves</option>
-                            <option value="brawl">Brawl Stars</option>
-                            <option value="royale">Clash Royale</option>
-                            <option value="clash">Clash of Clans</option>
-                            <option value="honkai">Honkai Star Rail</option>
-                            <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
-                            <option value="accessories">Discord Accessories (без Nitro)</option>
-                            <option value="steam">Steam Games</option>
-                        </select>
-                    </div>
-                    <div className="cart-btn-container">
-                        <button onClick={toggleCart} className="cart-btn">
-                            Показать корзину
-                        </button>
+                    <div className='toph'>
+                        <div className="filter">
+                            <label htmlFor="category">Продукт: </label>
+                            <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
+                                <option value="All">All</option>
+                                <option value="lol">League of Legends</option>
+                                <option value="genshin">Genshin Impact</option>
+                                <option value="wuwa">Wuthering Waves</option>
+                                <option value="brawl">Brawl Stars</option>
+                                <option value="royale">Clash Royale</option>
+                                <option value="clash">Clash of Clans</option>
+                                <option value="honkai">Honkai Star Rail</option>
+                                <option value="nitro-accessories">Discord Accessories (с Nitro)</option>
+                                <option value="accessories">Discord Accessories (без Nitro)</option>
+                                <option value="steam">Steam Games</option>
+                            </select>
+                        </div>
+                        <div className="cart-btn-container">
+                            <button onClick={toggleCart} className="cart-btn">
+                                Показать корзину
+                            </button>
+                        </div>
                     </div>
                     
                     <div className="product-list">

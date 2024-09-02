@@ -19,11 +19,11 @@ body {
     /* color: #28a745; */
     font-size: 24px;
     margin-bottom: 20px;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .congratulations-container p {
-    font-size: 20px;
+    font-size: 18px;
     color: #333;
     font-weight: 200;
 }

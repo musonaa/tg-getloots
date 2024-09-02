@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route index element={<ProductList />}/>
         <Route path={'form'} element={<Form />}/>
-        <Route path="/congratulations" component={Congratulations} />
+        <Route path="congratulations" element={<Congratulations />} />
       </Routes>
     </div>
   );

@@ -23,9 +23,9 @@ const Cart = ({ items, onRemove, onPay, onClose }) => {
                     ))}
                 </ul>
             )}
-            {items.length > 0 && (
+            {/* {items.length > 0 && (
                 <Button onClick={onPay} className="pay-btn">Оплатить {items.reduce((acc, item) => acc + item.price, 0)} руб</Button>
-            )}
+            )} */}
             <Button onClick={onClose} className="close-btn">Назад</Button>
         </div>
     );

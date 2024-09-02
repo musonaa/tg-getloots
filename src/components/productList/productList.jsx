@@ -171,6 +171,7 @@ const ProductList = () => {
     .then(data => {
         console.log('Cart data saved:', data);
         navigate('/congratulations');  // Redirect to the Congratulations page
+        tg.MainButton.hide(); //ubiraem
     })
     .catch(error => {
         console.error('Error saving cart data:', error);

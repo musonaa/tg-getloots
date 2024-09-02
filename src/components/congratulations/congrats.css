@@ -25,21 +25,26 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: #333; /* Softer text color for comfort */
-    line-height: 1.6; /* Better readability */
+}
+
+.congratulations-container {
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .congratulations-container h1 {
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: 2em;
-    color: #333; /* Dark color for emphasis */
+    font-size: 24px;
+    color: #333;
     margin-bottom: 10px;
 }
 
 .congratulations-container p {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 1.2em;
+    font-size: 18px;
     color: #555; /* Slightly lighter color for main text */
     margin-top: 5px;
 }

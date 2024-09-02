@@ -1,3 +1,8 @@
+
+body{
+    font-family: Arial, sans-serif;
+}
+
 .product{
     display: flex;
     flex-direction: column;

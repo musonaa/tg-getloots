@@ -147,6 +147,26 @@
     z-index: 1000;
 }
 
+.filter {
+    margin-bottom: 20px;
+}
+
+.filter label {
+    margin-right: 10px;
+}
+
+.filter select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
     .product-item {
         width: calc(50% - 20px); /* 2 items per row on tablets and larger phones */

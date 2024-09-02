@@ -1,6 +1,5 @@
 import React from 'react';
 import './congrats.css';
-import "./images/kawaii-cute.gif"
 
 const Congratulations = () => {
     return (

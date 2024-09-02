@@ -7,6 +7,9 @@ const Congratulations = () => {
             
             <h1>Ваш заказ успешно оформлен!</h1>
             <p>Ожидайте пока @lLojin свяжется с вами. Спасибо что воспользовались нашим сервисом!</p>
+            <div className="gif-section">
+                <img src= "https://tenor.com/ru/view/kawaii-cute-peach-cat-gif-23743858" alt="Thank YOU" className="tu-gif" />
+            </div>
         </div>
     );
 };

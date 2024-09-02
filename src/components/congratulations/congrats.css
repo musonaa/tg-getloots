@@ -10,11 +10,11 @@
 
 .congratulations-container h1 {
     /* color: #28a745; */
-    font-size: 2.5em;
+    font-size: 48px;
     margin-bottom: 20px;
 }
 
 .congratulations-container p {
-    font-size: 1.2em;
+    font-size: 24px;
     color: #333;
 }

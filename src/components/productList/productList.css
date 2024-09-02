@@ -133,6 +133,20 @@
     margin-bottom: 20px;
 }
 
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--tg-theme-button-color);
+    color: white;
+    border: none;
+    padding: 8px 16px 12px 16px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
 @media (max-width: 768px) {
     .product-item {
         width: calc(50% - 20px); /* 2 items per row on tablets and larger phones */

@@ -159,8 +159,10 @@ const ProductList = () => {
             
     //     });
     // }, [addedItems, queryId]);
+                //local
+                // fetch("http://127.0.0.1:3001/save-cart", {
 
-                fetch("http://127.0.0.1:3001/save-cart", {
+                fetch("http://95.163.234.85:25742/save-cart", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

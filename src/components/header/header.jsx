@@ -10,7 +10,7 @@ const Header = () => {
         <div className={'header'}>
             {/* <Button onClick={onClose}>Закрыть</Button> */}
             <span className={'username'}>
-                <b>{user?.username}</b>, добро пожаловать в GetLootsss! <br />
+                <b>{user?.username}</b>, добро пожаловать в GetLoots! <br />
                 Желаем приятных покупок❤️
             </span>
         </div>   

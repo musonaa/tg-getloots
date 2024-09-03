@@ -233,7 +233,7 @@ const ProductList = () => {
             tg.MainButton.hide();
         } else {
             tg.MainButton.setParams({
-                text: `Приобрести за ${getTotalPrice(newItems)}₽`,
+                text: `Приобрести за <b>${getTotalPrice(newItems)}</b>₽`,
             });
         }
     };

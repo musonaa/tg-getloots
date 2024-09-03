@@ -110,6 +110,7 @@
     transition: background-color 0.3s;
 }
  */
+ @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
  .product-list {
     display: flex;
@@ -157,6 +158,7 @@
 
 .filter {
     margin-bottom: 20px;
+    font-family: "Nunito", sans-serif;
 }
 
 .filter label {

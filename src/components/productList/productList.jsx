@@ -162,7 +162,7 @@ const ProductList = () => {
                 //local
                 // fetch("http://127.0.0.1:3001/save-cart", {
 
-                fetch("https://46.101.117.21:80/save-cart", {
+                fetch("http://46.101.117.21:80/save-cart", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

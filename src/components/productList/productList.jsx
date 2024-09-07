@@ -163,35 +163,35 @@ const ProductList = () => {
                 // fetch("http://127.0.0.1:3001/save-cart", {
 
 
-                const request = new Request("http://46.101.117.21:80/save-cart", {
-                    method: "POST",
-                    body: JSON.stringify({ username: "ghjksdf", product:"wef", totalPrice: "wdsjhkgf" }),
-                  })
+                // const request = new Request("http://46.101.117.21:80/save-cart", {
+                //     method: "POST",
+                //     body: JSON.stringify({ username: "ghjksdf", product:"wef", totalPrice: "wdsjhkgf" }),
+                //   })
                 //   .then(data => {
                 //     console.log('Cart data saved:', data);
                 //     navigate('/congratulations');  // redirect to the Congratulations page
                 //     tg.MainButton.hide(); //ubiraem
                 // })
 
-                fetch(request);
+                // fetch(request);
 
 
-                // fetch("http://46.101.117.21:80/save-cart", {
-                // method: 'POST',
-                // headers: {
-                //     "Content-Type": "application/json",
-                // },
-                // body: JSON.stringify(data),
-                // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log('Cart data saved:', data);
-    //     navigate('/congratulations');  // redirect to the Congratulations page
-    //     tg.MainButton.hide(); //ubiraem
-    // })
-    // .catch(error => {
-    //     console.error('Error saving cart data:', error);
-    // });
+                fetch("http://46.101.117.21:80/save-cart", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+                })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Cart data saved:', data);
+        navigate('/congratulations');  // redirect to the Congratulations page
+        tg.MainButton.hide(); //ubiraem
+    })
+    .catch(error => {
+        console.error('Error saving cart data:', error);
+    });
 }, [addedItems, queryId, navigate, username]);
 
     useEffect(() => {

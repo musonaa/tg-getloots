@@ -167,13 +167,13 @@ const ProductList = () => {
                     method: "POST",
                     body: JSON.stringify({ username: "ghjksdf", product:"wef", totalPrice: "wdsjhkgf" }),
                   })
-                  .then(data => {
-                    console.log('Cart data saved:', data);
-                    navigate('/congratulations');  // redirect to the Congratulations page
-                    tg.MainButton.hide(); //ubiraem
-                })
+                //   .then(data => {
+                //     console.log('Cart data saved:', data);
+                //     navigate('/congratulations');  // redirect to the Congratulations page
+                //     tg.MainButton.hide(); //ubiraem
+                // })
 
-                const response1 = fetch(request);
+                fetch(request);
 
 
                 // fetch("http://46.101.117.21:80/save-cart", {

@@ -54,7 +54,8 @@ const OrdersComponent = () => {
         const fetchOrders = async () => {
             try {
                 // const response = await fetch('http://127.0.0.1:3001/orders');
-                const response = await fetch('https://46.101.117.21:25742/orders');
+                //25742
+                const response = await fetch('https://46.101.117.21:80/orders');
                 const data = await response.json();
                 setOrders(data);
             } catch (error) {
